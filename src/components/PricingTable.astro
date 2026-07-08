@@ -1,0 +1,30 @@
+---
+import { formatCny, type PriceRow } from '../lib/pricing';
+import { t } from '../i18n/strings';
+import type { Locale } from '../i18n/utils';
+
+interface Props {
+  pricing: PriceRow[];
+  pricingMode: 'package' | 'per_day';
+  note?: string;
+  locale: Locale;
+}
+
+const { pricing, pricingMode, note, locale } = Astro.props;
+const modeLabel = t(locale, `pricing.mode.${pricingMode}`);
+---
+
+<div class="pricing-table" data-testid="pricing-table">
+  <p class="pricing-mode">{modeLabel}</p>
+  <table>
+    <tbody>
+      {pricing.map((row) => (
+        <tr>
+          <th scope="row">{t(locale, `vehicles.type.${row.vehicle_type}`)}</th>
+          <td>{formatCny(row.price_cny)}</td>
+        </tr>
+      ))}
+    </tbody>
+  </table>
+  {note && <p class="note">{note}</p>}
+</div>

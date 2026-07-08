@@ -1,0 +1,35 @@
+---
+import { localizedField } from '../content/queries';
+import { formatCny, lowestPriceCny } from '../lib/pricing';
+import { t } from '../i18n/strings';
+import { localizedUrl, type Locale } from '../i18n/utils';
+
+interface Props {
+  route: Record<string, any>;
+  locale: Locale;
+}
+
+const { route, locale } = Astro.props;
+const title = localizedField(route, 'title', locale);
+const href = localizedUrl(`/routes/${route.slug}`, locale);
+const dayLabel = t(locale, route.days === 1 ? 'routes.day' : 'routes.days');
+const highlights: string[] =
+  locale === 'en' && route.highlights_en?.length ? route.highlights_en : route.highlights_zh ?? [];
+const from = lowestPriceCny(route.pricing ?? []);
+const fromLabel = t(locale, 'pricing.from');
+---
+
+<a class="card route-card" data-testid="route-card" href={href}>
+  <h3>{title}</h3>
+  <p class="meta">{route.days} {dayLabel}{route.regions?.length > 0 && <> · {route.regions.join(' · ')}</>}</p>
+  {highlights.length > 0 && (
+    <ul class="tags">{highlights.map((h) => <li>{h}</li>)}</ul>
+  )}
+  {from != null && (
+    <p class="from">
+      {locale === 'en'
+        ? <><span>{fromLabel}</span> <strong>{formatCny(from)}</strong></>
+        : <><strong>{formatCny(from)}</strong> <span>{fromLabel}</span></>}
+    </p>
+  )}
+</a>

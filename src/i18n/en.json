@@ -29,5 +29,13 @@
   "vehicles.type.sedan": "Sedan",
   "vehicles.type.suv": "SUV",
   "vehicles.type.van": "Van",
-  "vehicles.type.minibus": "Minibus"
+  "vehicles.type.minibus": "Minibus",
+  "routes.day": "day",
+  "routes.days": "days",
+  "routes.highlights": "Highlights",
+  "routes.itinerary": "Itinerary",
+  "routes.featured": "Featured routes",
+  "pricing.from": "from",
+  "pricing.mode.package": "Package price",
+  "pricing.mode.per_day": "Per-day price"
 }
