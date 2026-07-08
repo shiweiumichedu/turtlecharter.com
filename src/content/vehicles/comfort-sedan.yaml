@@ -1,0 +1,13 @@
+# Sample placeholder content — replace with real fleet data.
+slug: comfort-sedan
+name_zh: 舒适轿车（5座）
+name_en: Comfort Sedan (5-seat)
+type: sedan
+seats: 4
+luggage: 2
+features_zh: [空调, 舒适, 适合情侣或小家庭]
+features_en: [Air-conditioned, Comfortable, Couples or small family]
+day_rate_cny: 800
+day_rate_note_zh: 每日8小时/300公里，超出另计
+day_rate_note_en: 8 hours / 300 km per day; extra usage billed separately
+order: 1

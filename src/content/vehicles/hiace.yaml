@@ -1,0 +1,13 @@
+# Sample placeholder content — replace with real fleet data.
+slug: hiace
+name_zh: 丰田海狮（9座商务）
+name_en: Toyota HiAce (9-seat van)
+type: van
+seats: 9
+luggage: 6
+features_zh: [空调, 宽敞, 适合家庭或小团]
+features_en: [Air-conditioned, Spacious, Family or small group]
+day_rate_cny: 1300
+day_rate_note_zh: 每日8小时/300公里，超出另计
+day_rate_note_en: 8 hours / 300 km per day; extra usage billed separately
+order: 2
