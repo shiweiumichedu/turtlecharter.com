@@ -1,0 +1,19 @@
+---
+import { getCollection } from 'astro:content';
+import BaseLayout from '../../../layouts/BaseLayout.astro';
+import DestinationCard from '../../../components/DestinationCard.astro';
+import { byOrder } from '../../../content/queries';
+import { currentLocale } from '../../../i18n/utils';
+import { t } from '../../../i18n/strings';
+
+const locale = currentLocale(Astro.url.pathname);
+const destinations = byOrder((await getCollection('destinations')).map((e) => e.data));
+---
+
+<BaseLayout title={t(locale, 'destinations.title')}>
+  <h1>{t(locale, 'destinations.title')}</h1>
+  <p class="lead">{t(locale, 'destinations.intro')}</p>
+  <div class="card-grid">
+    {destinations.map((d) => <DestinationCard destination={d} locale={locale} />)}
+  </div>
+</BaseLayout>

@@ -3,7 +3,7 @@ import { test, expect } from '@playwright/test';
 test('/ serves Chinese with lang=zh', async ({ page }) => {
   await page.goto('/');
   await expect(page.locator('html')).toHaveAttribute('lang', 'zh');
-  await expect(page.locator('[data-testid="site-header"]')).toContainText('云南龟途包车');
+  await expect(page.locator('[data-testid="site-header"]')).toContainText('云南海归包车');
 });
 
 test('/en/ serves English with lang=en', async ({ page }) => {

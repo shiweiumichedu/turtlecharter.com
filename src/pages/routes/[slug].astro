@@ -2,7 +2,7 @@
 import { getCollection, render } from 'astro:content';
 import BaseLayout from '../../layouts/BaseLayout.astro';
 import PricingTable from '../../components/PricingTable.astro';
-import { localizedField } from '../../content/queries';
+import { localizedField, destinationForRoute } from '../../content/queries';
 import { currentLocale } from '../../i18n/utils';
 import { t } from '../../i18n/strings';
 
@@ -22,10 +22,18 @@ const dayLabel = t(locale, data.days === 1 ? 'routes.day' : 'routes.days');
 const highlights: string[] =
   locale === 'en' && data.highlights_en?.length ? data.highlights_en : data.highlights_zh ?? [];
 const priceNote = localizedField(data, 'price_note', locale);
+
+// Hero: the image of the route's primary matching destination region.
+const destinations = (await getCollection('destinations')).map((e) => e.data);
+const cover = destinationForRoute(destinations, data);
+const coverAlt = cover ? localizedField(cover, 'alt', locale) || localizedField(cover, 'name', locale) : '';
 ---
 
 <BaseLayout title={title}>
   <article class="route-detail">
+    {cover && (
+      <img class="route-hero__img" src={cover.image} alt={coverAlt} decoding="async" />
+    )}
     <h1>{title}</h1>
     <p class="meta">{data.days} {dayLabel}{data.regions?.length > 0 && <> · {data.regions.join(' · ')}</>}</p>
 

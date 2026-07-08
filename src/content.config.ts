@@ -4,6 +4,7 @@ import {
   driverSchema,
   vehicleSchema,
   routeSchema,
+  destinationSchema,
   testimonialSchema,
   faqSchema,
 } from './content/schemas';
@@ -23,6 +24,11 @@ const routes = defineCollection({
   schema: routeSchema,
 });
 
+const destinations = defineCollection({
+  loader: glob({ pattern: '**/*.md', base: './src/content/destinations' }),
+  schema: destinationSchema,
+});
+
 const testimonials = defineCollection({
   loader: glob({ pattern: '**/*.md', base: './src/content/testimonials' }),
   schema: testimonialSchema,
@@ -33,4 +39,4 @@ const faq = defineCollection({
   schema: faqSchema,
 });
 
-export const collections = { drivers, vehicles, routes, testimonials, faq };
+export const collections = { drivers, vehicles, routes, destinations, testimonials, faq };

@@ -1,5 +1,5 @@
 import { describe, it, expect } from 'vitest';
-import { readFileSync, readdirSync } from 'node:fs';
+import { readFileSync, readdirSync, existsSync } from 'node:fs';
 import { resolve } from 'node:path';
 import { resolveRef } from '../../src/content/queries';
 
@@ -32,6 +32,11 @@ const vehicles = read('vehicles').map((v) => ({
 const drivers = read('drivers').map((d) => ({ slug: scalar(d.text, 'slug')!, text: d.text }));
 const routes = read('routes').map((r) => ({ slug: scalar(r.text, 'slug')!, text: r.text }));
 const testimonials = read('testimonials').map((t) => ({ text: t.text, file: t.file }));
+const destinations = read('destinations').map((d) => ({
+  slug: scalar(d.text, 'slug')!,
+  region: scalar(d.text, 'region'),
+  image: scalar(d.text, 'image'),
+}));
 
 describe('sample content referential integrity', () => {
   it('every driver.vehicle resolves to a vehicle slug', () => {
@@ -56,6 +61,37 @@ describe('sample content referential integrity', () => {
       const driver = scalar(t.text, 'driver');
       if (route) expect(resolveRef(routes, route), `${t.file} → ${route}`).toBeDefined();
       if (driver) expect(resolveRef(drivers, driver), `${t.file} → ${driver}`).toBeDefined();
+    }
+  });
+});
+
+describe('destination content', () => {
+  const PUBLIC = resolve(process.cwd(), 'public');
+
+  it('every destination declares a region and an image', () => {
+    for (const d of destinations) {
+      expect(d.region, `${d.slug} region`).toBeTruthy();
+      expect(d.image, `${d.slug} image`).toBeTruthy();
+    }
+  });
+
+  it("every destination's image file exists under public/", () => {
+    for (const d of destinations) {
+      const file = resolve(PUBLIC, d.image!.replace(/^\//, ''));
+      expect(existsSync(file), `${d.slug} → ${d.image}`).toBe(true);
+    }
+  });
+
+  it('every route region has at least one destination image available', () => {
+    const covered = new Set(destinations.map((d) => d.region));
+    // Regions listed by routes should have imagery so route cards/heros render a cover.
+    for (const r of routes) {
+      const regions = [...r.text.matchAll(/^\s*-?\s*regions?:\s*\[([^\]]*)\]/gm)]
+        .flatMap((m) => m[1].split(',').map((s) => s.trim()))
+        .filter(Boolean);
+      for (const region of regions) {
+        expect(covered.has(region), `${r.slug} → ${region}`).toBe(true);
+      }
     }
   });
 });

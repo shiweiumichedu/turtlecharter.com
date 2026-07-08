@@ -62,6 +62,17 @@ export const routeSchema = z.object({
   ...listable,
 });
 
+export const destinationSchema = z.object({
+  slug: z.string().min(1),
+  ...bilingual('name'),
+  region: z.string().min(1), // must match the strings used in route `regions`
+  image: z.string().min(1),
+  ...bilingual('alt', { required: false }), // image alt text; falls back to name
+  ...bilingual('blurb', { required: false }),
+  credit: z.string().optional(),
+  ...listable,
+});
+
 export const testimonialSchema = z.object({
   ...bilingual('author'),
   avatar: z.string().optional(),

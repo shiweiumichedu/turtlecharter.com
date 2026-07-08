@@ -3,6 +3,7 @@ import {
   driverSchema,
   vehicleSchema,
   routeSchema,
+  destinationSchema,
   testimonialSchema,
   faqSchema,
 } from '../../src/content/schemas';
@@ -58,6 +59,25 @@ describe('routeSchema', () => {
   });
   it('rejects an invalid pricing mode', () => {
     expect(routeSchema.safeParse({ ...base, pricing_mode: 'weekly' }).success).toBe(false);
+  });
+});
+
+describe('destinationSchema', () => {
+  const base = { slug: 'dali', name_zh: '大理', region: '大理', image: '/images/destinations/dali.jpg' };
+  it('accepts a valid entry', () => {
+    expect(destinationSchema.safeParse(base).success).toBe(true);
+  });
+  it('requires a region', () => {
+    const { region, ...withoutRegion } = base;
+    expect(destinationSchema.safeParse(withoutRegion).success).toBe(false);
+  });
+  it('requires an image', () => {
+    const { image, ...withoutImage } = base;
+    expect(destinationSchema.safeParse(withoutImage).success).toBe(false);
+  });
+  it('keeps optional bilingual alt text', () => {
+    const r = destinationSchema.safeParse({ ...base, alt_en: 'The Three Pagodas of Dali' });
+    expect(r.success && r.data.alt_en).toBe('The Three Pagodas of Dali');
   });
 });
 

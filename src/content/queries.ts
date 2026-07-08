@@ -38,6 +38,22 @@ export function bySlug<T extends { slug: string }>(
   return items.find((item) => item.slug === slug);
 }
 
+/**
+ * Find the destination whose `region` matches one of a route's `regions`, trying
+ * regions in their listed order (so the route's primary region wins). → undefined
+ * when the route has no regions or none has a matching destination.
+ */
+export function destinationForRoute<T extends { region: string }>(
+  destinations: readonly T[],
+  route: { regions?: readonly string[] },
+): T | undefined {
+  for (const region of route.regions ?? []) {
+    const match = destinations.find((d) => d.region === region);
+    if (match) return match;
+  }
+  return undefined;
+}
+
 /** Resolve a reference slug to its target entry; undefined slug or no match → undefined. */
 export function resolveRef<T extends { slug: string }>(
   items: readonly T[],

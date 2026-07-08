@@ -2,12 +2,14 @@
 import { getCollection } from 'astro:content';
 import BaseLayout from '../layouts/BaseLayout.astro';
 import RouteCard from '../components/RouteCard.astro';
+import DestinationCard from '../components/DestinationCard.astro';
 import TestimonialCard from '../components/TestimonialCard.astro';
 import { byOrder, featured, localizedField, resolveRef } from '../content/queries';
 import { currentLocale, localizedUrl } from '../i18n/utils';
 import { t } from '../i18n/strings';
 
 const locale = currentLocale(Astro.url.pathname);
+const destinations = byOrder((await getCollection('destinations')).map((e) => e.data));
 const featuredRoutes = byOrder(featured((await getCollection('routes')).map((e) => e.data)));
 const featuredTestimonials = byOrder(featured((await getCollection('testimonials')).map((e) => e.data)));
 const routes = (await getCollection('routes')).map((e) => e.data);
@@ -32,6 +34,16 @@ function driverLink(slug: string | undefined) {
     <h1>一站式纯玩 · 云南私人包车游</h1>
     <p>专为海外游客打造的云南包车纯玩服务：专属车辆、当地司机向导、灵活路线、无购物。</p>
   </section>
+
+  {destinations.length > 0 && (
+    <section class="featured-destinations">
+      <h2>{t(locale, 'destinations.title')}</h2>
+      <p class="lead">{t(locale, 'destinations.intro')}</p>
+      <div class="card-grid">
+        {destinations.map((d) => <DestinationCard destination={d} locale={locale} />)}
+      </div>
+    </section>
+  )}
 
   {featuredRoutes.length > 0 && (
     <section class="featured-routes">

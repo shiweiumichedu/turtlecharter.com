@@ -5,6 +5,7 @@ import {
   featured,
   bySlug,
   resolveRef,
+  destinationForRoute,
   groupByCategory,
   FAQ_CATEGORY_ORDER,
 } from '../../src/content/queries';
@@ -108,5 +109,31 @@ describe('groupByCategory (FAQ)', () => {
     for (const value of enumValues) {
       expect(FAQ_CATEGORY_ORDER).toContain(value);
     }
+  });
+});
+
+describe('destinationForRoute', () => {
+  const destinations = [
+    { slug: 'kunming', region: '昆明' },
+    { slug: 'dali', region: '大理' },
+    { slug: 'lijiang', region: '丽江' },
+  ];
+
+  it('matches the first (primary) region a route lists', () => {
+    const route = { regions: ['昆明', '大理', '丽江'] };
+    expect(destinationForRoute(destinations, route)?.slug).toBe('kunming');
+  });
+
+  it('falls through to a later region when the first has no destination', () => {
+    const route = { regions: ['香格里拉', '大理'] };
+    expect(destinationForRoute(destinations, route)?.slug).toBe('dali');
+  });
+
+  it('returns undefined when no region matches', () => {
+    expect(destinationForRoute(destinations, { regions: ['西双版纳'] })).toBeUndefined();
+  });
+
+  it('returns undefined when the route has no regions', () => {
+    expect(destinationForRoute(destinations, {})).toBeUndefined();
   });
 });
