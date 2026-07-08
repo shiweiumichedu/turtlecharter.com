@@ -1,0 +1,29 @@
+---
+import { currentLocale, localizedUrl } from '../i18n/utils';
+import { t } from '../i18n/strings';
+import { navItems } from '../i18n/nav';
+
+const path = Astro.url.pathname;
+const locale = currentLocale(path);
+
+// Contact channels: email + WeChat only (no WhatsApp, per business preference).
+const email = 'hello@turtlecharter.com';
+const wechat = 'TurtleCharter';
+---
+
+<footer class="site-footer" data-testid="site-footer">
+  <div class="footer-col">
+    <h3>{t(locale, 'footer.contactTitle')}</h3>
+    <p>{t(locale, 'footer.email')}: <a href={`mailto:${email}`}>{email}</a></p>
+    <p>{t(locale, 'footer.wechat')}: {wechat}</p>
+  </div>
+
+  <nav class="footer-col" aria-label="Footer">
+    <h3>{t(locale, 'footer.quickLinks')}</h3>
+    {navItems.map((item) => (
+      <a href={localizedUrl(item.path, locale)}>{t(locale, item.key)}</a>
+    ))}
+  </nav>
+
+  <p class="footer-legal">© 2026 {t(locale, 'site.name')} · {t(locale, 'footer.rights')}</p>
+</footer>

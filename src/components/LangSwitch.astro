@@ -1,0 +1,14 @@
+---
+// Language switch: a pure computed anchor (no JS) to the current page's
+// equivalent in the other locale, so it preserves the page, not the homepage.
+import { currentLocale, localizedUrl } from '../i18n/utils';
+import { t } from '../i18n/strings';
+
+const path = Astro.url.pathname;
+const locale = currentLocale(path);
+const other = locale === 'zh' ? 'en' : 'zh';
+const href = localizedUrl(path, other);
+const label = t(locale, 'lang.switchTo');
+---
+
+<a class="lang-switch" data-testid="lang-switch" href={href} hreflang={other}>{label}</a>

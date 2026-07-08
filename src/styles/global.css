@@ -1,0 +1,220 @@
+/* ---- Design tokens ---------------------------------------------------- */
+:root {
+  --color-bg: #ffffff;
+  --color-fg: #1a1a1a;
+  --color-muted: #5b6470;
+  --color-brand: #0e7c66; /* jade green — nods to Yunnan / turtle */
+  --color-brand-dark: #0a5c4c;
+  --color-accent: #e8a13a;
+  --color-border: #e4e7eb;
+  --color-surface: #f6f8f7;
+
+  --font-sans: system-ui, -apple-system, "PingFang SC", "Microsoft YaHei",
+    "Hiragino Sans GB", "Segoe UI", Roboto, sans-serif;
+
+  --space-1: 0.25rem;
+  --space-2: 0.5rem;
+  --space-3: 1rem;
+  --space-4: 1.5rem;
+  --space-5: 2rem;
+  --space-6: 3rem;
+
+  --radius: 0.5rem;
+  --maxw: 72rem;
+  --header-h: 3.5rem;
+}
+
+/* ---- Base (mobile-first) --------------------------------------------- */
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html {
+  font-family: var(--font-sans);
+  color: var(--color-fg);
+  background: var(--color-bg);
+  line-height: 1.6;
+  -webkit-text-size-adjust: 100%;
+}
+
+body {
+  margin: 0;
+  min-height: 100vh;
+  /* room for the sticky mobile CTA so it never covers content */
+  padding-bottom: 4rem;
+}
+
+h1,
+h2,
+h3 {
+  line-height: 1.25;
+  margin: 0 0 var(--space-3);
+}
+
+a {
+  color: var(--color-brand-dark);
+  text-decoration: none;
+}
+a:hover {
+  text-decoration: underline;
+}
+
+main {
+  max-width: var(--maxw);
+  margin: 0 auto;
+  padding: var(--space-5) var(--space-3);
+}
+
+img {
+  max-width: 100%;
+  height: auto;
+}
+
+/* ---- Header ----------------------------------------------------------- */
+.site-header {
+  display: flex;
+  align-items: center;
+  gap: var(--space-3);
+  flex-wrap: wrap;
+  padding: var(--space-2) var(--space-3);
+  border-bottom: 1px solid var(--color-border);
+  background: var(--color-bg);
+}
+
+.brand {
+  font-weight: 700;
+  font-size: 1.1rem;
+  color: var(--color-brand-dark);
+  margin-right: auto;
+}
+
+.menu-toggle {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 2.5rem;
+  height: 2.5rem;
+  font-size: 1.4rem;
+  cursor: pointer;
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius);
+  user-select: none;
+}
+
+.nav-toggle-checkbox {
+  position: absolute;
+  opacity: 0;
+  width: 0;
+  height: 0;
+  pointer-events: none;
+}
+
+/* Mobile: nav collapsed by default; the checkbox hack reveals it */
+.primary-nav {
+  display: none;
+  flex-direction: column;
+  gap: var(--space-2);
+  width: 100%;
+  padding: var(--space-2) 0;
+}
+.nav-toggle-checkbox:checked ~ .primary-nav {
+  display: flex;
+}
+.primary-nav a {
+  padding: var(--space-2) 0;
+  color: var(--color-fg);
+}
+
+.header-actions {
+  display: flex;
+  align-items: center;
+  gap: var(--space-3);
+  margin-left: auto;
+}
+
+.lang-switch {
+  font-weight: 600;
+  color: var(--color-brand-dark);
+}
+
+.cta--primary {
+  display: inline-block;
+  padding: var(--space-2) var(--space-3);
+  background: var(--color-brand);
+  color: #fff;
+  border-radius: var(--radius);
+  font-weight: 600;
+}
+.cta--primary:hover {
+  background: var(--color-brand-dark);
+  text-decoration: none;
+}
+
+/* ---- Footer ----------------------------------------------------------- */
+.site-footer {
+  display: grid;
+  gap: var(--space-4);
+  max-width: var(--maxw);
+  margin: var(--space-6) auto 0;
+  padding: var(--space-5) var(--space-3);
+  border-top: 1px solid var(--color-border);
+  background: var(--color-surface);
+  color: var(--color-muted);
+}
+.site-footer h3 {
+  font-size: 0.95rem;
+  color: var(--color-fg);
+}
+.footer-col {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-1);
+}
+.footer-legal {
+  margin: 0;
+  font-size: 0.85rem;
+}
+
+/* ---- Sticky mobile inquiry CTA --------------------------------------- */
+.sticky-cta {
+  position: fixed;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: 50;
+  display: block;
+  text-align: center;
+  padding: var(--space-3);
+  background: var(--color-accent);
+  color: #1a1a1a;
+  font-weight: 700;
+}
+.sticky-cta:hover {
+  text-decoration: none;
+  filter: brightness(0.97);
+}
+
+/* ---- Desktop ---------------------------------------------------------- */
+@media (min-width: 768px) {
+  .menu-toggle {
+    display: none;
+  }
+  .primary-nav {
+    display: flex;
+    flex-direction: row;
+    width: auto;
+    gap: var(--space-4);
+    padding: 0;
+  }
+  .sticky-cta {
+    display: none;
+  }
+  body {
+    padding-bottom: 0;
+  }
+  .site-footer {
+    grid-template-columns: 1fr 1fr;
+  }
+}

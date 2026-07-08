@@ -1,0 +1,23 @@
+{
+  "name": "turtlecharter.com",
+  "type": "module",
+  "version": "0.1.0",
+  "private": true,
+  "description": "Bilingual (中文/English) Yunnan private car-charter tour site for overseas visitors",
+  "scripts": {
+    "dev": "astro dev",
+    "build": "astro build",
+    "preview": "astro preview",
+    "astro": "astro",
+    "test": "vitest run",
+    "test:watch": "vitest",
+    "test:e2e": "playwright test"
+  },
+  "dependencies": {
+    "astro": "^5.13.0"
+  },
+  "devDependencies": {
+    "@playwright/test": "^1.48.0",
+    "vitest": "^2.1.9"
+  }
+}

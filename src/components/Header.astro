@@ -1,0 +1,32 @@
+---
+import LangSwitch from './LangSwitch.astro';
+import { currentLocale, localizedUrl } from '../i18n/utils';
+import { t } from '../i18n/strings';
+import { navItems } from '../i18n/nav';
+
+const path = Astro.url.pathname;
+const locale = currentLocale(path);
+const home = localizedUrl('/', locale);
+const contactHref = localizedUrl('/contact', locale);
+---
+
+<header class="site-header" data-testid="site-header">
+  <a class="brand" href={home}>{t(locale, 'site.name')}</a>
+
+  <!-- Pure-CSS mobile menu toggle (checkbox hack, no JS) -->
+  <input type="checkbox" id="nav-toggle" class="nav-toggle-checkbox" aria-hidden="true" />
+  <label for="nav-toggle" class="menu-toggle" data-testid="menu-toggle" aria-label="Menu">☰</label>
+
+  <nav class="primary-nav" data-testid="primary-nav" aria-label="Primary">
+    {navItems.map((item) => (
+      <a href={localizedUrl(item.path, locale)}>{t(locale, item.key)}</a>
+    ))}
+  </nav>
+
+  <div class="header-actions">
+    <LangSwitch />
+    <a class="cta cta--primary" data-testid="cta-custom-trip" href={contactHref}>
+      {t(locale, 'cta.customTrip')}
+    </a>
+  </div>
+</header>

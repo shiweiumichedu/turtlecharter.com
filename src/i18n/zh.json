@@ -1,0 +1,20 @@
+{
+  "site.name": "云南龟途包车",
+  "site.tagline": "一站式纯玩 · 云南私人包车游",
+  "nav.home": "首页",
+  "nav.routes": "经典路线",
+  "nav.vehicles": "车辆",
+  "nav.drivers": "司机",
+  "nav.testimonials": "客户评价",
+  "nav.faq": "常见问题",
+  "nav.about": "关于我们",
+  "nav.contact": "联系我们",
+  "cta.customTrip": "免费定制",
+  "cta.inquire": "立即咨询",
+  "lang.switchTo": "English",
+  "footer.contactTitle": "联系方式",
+  "footer.email": "邮箱",
+  "footer.wechat": "微信",
+  "footer.quickLinks": "快速链接",
+  "footer.rights": "版权所有"
+}

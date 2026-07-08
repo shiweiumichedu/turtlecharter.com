@@ -1,0 +1,49 @@
+---
+import '../styles/global.css';
+import Header from '../components/Header.astro';
+import Footer from '../components/Footer.astro';
+import { currentLocale, localizedUrl } from '../i18n/utils';
+import { t } from '../i18n/strings';
+
+interface Props {
+  title?: string;
+  description?: string;
+}
+
+const { title, description } = Astro.props;
+const path = Astro.url.pathname;
+const locale = currentLocale(path);
+
+const pageTitle = title ? `${title} · ${t(locale, 'site.name')}` : t(locale, 'site.name');
+const pageDesc = description ?? t(locale, 'site.tagline');
+
+const origin = Astro.site ? Astro.site.toString().replace(/\/$/, '') : '';
+const zhHref = origin + localizedUrl(path, 'zh');
+const enHref = origin + localizedUrl(path, 'en');
+const contactHref = localizedUrl('/contact', locale);
+---
+
+<!doctype html>
+<html lang={locale}>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>{pageTitle}</title>
+    <meta name="description" content={pageDesc} />
+    <link rel="alternate" hreflang="zh" href={zhHref} />
+    <link rel="alternate" hreflang="en" href={enHref} />
+    <link rel="alternate" hreflang="x-default" href={zhHref} />
+  </head>
+  <body>
+    <Header />
+    <main>
+      <slot />
+    </main>
+    <Footer />
+
+    <!-- Sticky inquiry CTA — visible on mobile only (see global.css) -->
+    <a class="sticky-cta" data-testid="sticky-cta" href={contactHref}>
+      {t(locale, 'cta.inquire')}
+    </a>
+  </body>
+</html>
