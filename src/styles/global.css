@@ -335,6 +335,24 @@ a.card:hover {
   color: var(--color-fg);
 }
 
+/* ---- About ---------------------------------------------------------- */
+.about .lead {
+  font-size: 1.1rem;
+  color: var(--color-fg);
+  margin: 0 0 var(--space-5);
+}
+.about-section {
+  margin: var(--space-5) 0;
+}
+.about-section .value-props,
+.about-section .steps {
+  padding-left: var(--space-4);
+}
+.about-section .value-props li,
+.about-section .steps li {
+  margin: var(--space-2) 0;
+}
+
 .driver-detail p {
   margin: 0 0 var(--space-2);
 }

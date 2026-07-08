@@ -1,0 +1,39 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import { currentLocale, localizedUrl } from '../../i18n/utils';
+
+const locale = currentLocale(Astro.url.pathname);
+const contactHref = localizedUrl('/contact', locale);
+---
+
+<BaseLayout title="About" description="Yunnan Turtle Charter: a pure-play private car-charter service built for overseas travelers.">
+  <article class="about">
+    <h1>About us</h1>
+    <p class="lead">
+      Yunnan Turtle Charter is a private car-charter service built for overseas travelers.
+      We believe travel should be pure — a dedicated vehicle, a local driver-guide who knows
+      the region, flexible routes, and zero shopping stops from start to finish.
+    </p>
+
+    <section class="about-section">
+      <h2>Why choose us</h2>
+      <ul class="value-props">
+        <li>A dedicated vehicle — never shared with strangers</li>
+        <li>A local driver-guide who knows the roads and the culture</li>
+        <li>Flexible routes, customized to your pace and interests</li>
+        <li>Pure-play with zero shopping stops or forced spending</li>
+        <li>Transparent pricing — fuel, tolls, and the driver's meals and lodging included</li>
+      </ul>
+    </section>
+
+    <section class="about-section">
+      <h2>How it works</h2>
+      <ol class="steps">
+        <li>Tell us your dates, party size, and interests via <a href={contactHref}>Contact</a></li>
+        <li>We put together a free custom itinerary and quote</li>
+        <li>Confirm the plan and the vehicle</li>
+        <li>Set off on a genuinely pure trip</li>
+      </ol>
+    </section>
+  </article>
+</BaseLayout>
