@@ -8,7 +8,7 @@ test('/contact renders the inquiry form, consent, and a mailto fallback action',
   await expect(form.locator('input[name="email"]')).toHaveCount(1);
   await expect(form.locator('textarea[name="message"]')).toHaveCount(1);
   await expect(form.locator('.inquiry-consent')).toBeVisible();
-  await expect(form).toHaveAttribute('action', 'mailto:hello@turtlecharter.com');
+  await expect(form).toHaveAttribute('action', 'mailto:contact@turtlecharter.com');
 });
 
 test('/en/contact renders the form in English', async ({ page }) => {
@@ -48,7 +48,7 @@ test('a valid submission composes a mailto with a labelled body', async ({ page 
   await expect(page.locator('[data-testid="inquiry-error"]')).toBeHidden();
   const mailto = await form.getAttribute('data-last-mailto');
   expect(mailto).not.toBeNull();
-  expect(mailto!.startsWith('mailto:hello@turtlecharter.com?subject=')).toBe(true);
+  expect(mailto!.startsWith('mailto:contact@turtlecharter.com?subject=')).toBe(true);
   const decoded = decodeURIComponent(mailto!);
   expect(decoded).toContain('称呼: 张三');
   expect(decoded).toContain('邮箱: zhangsan@example.com');

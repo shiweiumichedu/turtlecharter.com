@@ -1,7 +1,7 @@
 import { describe, it, expect } from 'vitest';
 import { buildInquiryMailto } from '../../src/lib/inquiry';
 
-const to = 'hello@turtlecharter.com';
+const to = 'contact@turtlecharter.com';
 
 function parse(url: string) {
   expect(url.startsWith(`mailto:${to}?`)).toBe(true);
