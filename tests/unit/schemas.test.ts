@@ -4,6 +4,7 @@ import {
   vehicleSchema,
   routeSchema,
   destinationSchema,
+  attractionSchema,
   testimonialSchema,
   faqSchema,
 } from '../../src/content/schemas';
@@ -59,6 +60,44 @@ describe('routeSchema', () => {
   });
   it('rejects an invalid pricing mode', () => {
     expect(routeSchema.safeParse({ ...base, pricing_mode: 'weekly' }).success).toBe(false);
+  });
+  it('defaults itinerary to an empty array', () => {
+    const r = routeSchema.safeParse({ ...base, pricing_mode: 'package' });
+    expect(r.success && r.data.itinerary).toEqual([]);
+  });
+  it('accepts structured itinerary days with an optional place ref', () => {
+    const r = routeSchema.safeParse({
+      ...base,
+      pricing_mode: 'package',
+      itinerary: [
+        { day: 1, place: 'kunming', title_zh: '昆明抵达', title_en: 'Arrive Kunming' },
+        { day: 2, title_zh: '返程' },
+      ],
+    });
+    expect(r.success).toBe(true);
+    expect(r.success && r.data.itinerary[0].place).toBe('kunming');
+  });
+  it('rejects an itinerary day missing its Chinese title', () => {
+    const r = routeSchema.safeParse({
+      ...base,
+      pricing_mode: 'package',
+      itinerary: [{ day: 1, place: 'kunming' }],
+    });
+    expect(r.success).toBe(false);
+  });
+});
+
+describe('attractionSchema', () => {
+  const base = { slug: 'erhai', name_zh: '洱海', image: '/images/attractions/erhai.jpg' };
+  it('accepts a valid entry', () => {
+    expect(attractionSchema.safeParse(base).success).toBe(true);
+  });
+  it('requires an image', () => {
+    const { image, ...withoutImage } = base;
+    expect(attractionSchema.safeParse(withoutImage).success).toBe(false);
+  });
+  it('treats region as optional', () => {
+    expect(attractionSchema.safeParse({ ...base, region: '大理' }).success).toBe(true);
   });
 });
 

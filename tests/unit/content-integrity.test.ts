@@ -37,6 +37,10 @@ const destinations = read('destinations').map((d) => ({
   region: scalar(d.text, 'region'),
   image: scalar(d.text, 'image'),
 }));
+const attractions = read('attractions').map((a) => ({
+  slug: scalar(a.text, 'slug')!,
+  image: scalar(a.text, 'image'),
+}));
 
 describe('sample content referential integrity', () => {
   it('every driver.vehicle resolves to a vehicle slug', () => {
@@ -91,6 +95,28 @@ describe('destination content', () => {
         .filter(Boolean);
       for (const region of regions) {
         expect(covered.has(region), `${r.slug} → ${region}`).toBe(true);
+      }
+    }
+  });
+});
+
+describe('attraction content', () => {
+  const PUBLIC = resolve(process.cwd(), 'public');
+
+  it("every attraction's image file exists under public/", () => {
+    for (const a of attractions) {
+      expect(a.image, `${a.slug} image`).toBeTruthy();
+      const file = resolve(PUBLIC, a.image!.replace(/^\//, ''));
+      expect(existsSync(file), `${a.slug} → ${a.image}`).toBe(true);
+    }
+  });
+
+  it('every itinerary place ref resolves to a destination or attraction slug', () => {
+    const places = new Set([...destinations, ...attractions].map((x) => x.slug));
+    for (const r of routes) {
+      const refs = [...r.text.matchAll(/^\s*place:\s*(\S+)\s*$/gm)].map((m) => m[1]);
+      for (const ref of refs) {
+        expect(places.has(ref), `${r.slug} → ${ref}`).toBe(true);
       }
     }
   });

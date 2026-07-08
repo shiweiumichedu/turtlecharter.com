@@ -54,6 +54,33 @@ export function destinationForRoute<T extends { region: string }>(
   return undefined;
 }
 
+/**
+ * Match a route highlight label (Chinese or English, whichever the locale shows)
+ * to an attraction by its `name_zh` / `name_en`. → undefined when nothing matches,
+ * so the caller can fall back to plain text.
+ */
+export function attractionByName<T extends { name_zh: string; name_en?: string }>(
+  attractions: readonly T[],
+  name: string,
+): T | undefined {
+  return attractions.find((a) => a.name_zh === name || a.name_en === name);
+}
+
+/**
+ * Resolve an itinerary `place` slug to an entry, checking destinations first then
+ * attractions (both carry an `image`). → undefined for an absent or unknown slug.
+ */
+export function resolvePlace<T extends { slug: string }>(
+  destinations: readonly T[],
+  attractions: readonly T[],
+  slug: string | undefined,
+): T | undefined {
+  if (slug === undefined) return undefined;
+  return (
+    destinations.find((d) => d.slug === slug) ?? attractions.find((a) => a.slug === slug)
+  );
+}
+
 /** Resolve a reference slug to its target entry; undefined slug or no match → undefined. */
 export function resolveRef<T extends { slug: string }>(
   items: readonly T[],

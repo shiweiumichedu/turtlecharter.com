@@ -8,6 +8,7 @@ export interface NavItem {
 export const navItems: NavItem[] = [
   { key: 'nav.routes', path: '/routes' },
   { key: 'nav.destinations', path: '/destinations' },
+  { key: 'nav.attractions', path: '/attractions' },
   { key: 'nav.vehicles', path: '/vehicles' },
   { key: 'nav.drivers', path: '/drivers' },
   { key: 'nav.testimonials', path: '/testimonials' },

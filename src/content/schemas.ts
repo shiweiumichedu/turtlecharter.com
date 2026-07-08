@@ -59,6 +59,28 @@ export const routeSchema = z.object({
     .array(z.object({ vehicle_type: z.string(), price_cny: z.number().nonnegative() }))
     .default([]),
   ...bilingual('price_note', { required: false }),
+  // Optional structured day-by-day plan; `place` refs a destination or attraction slug
+  // so each day can show that place's photo. Routes without it keep a prose itinerary.
+  itinerary: z
+    .array(
+      z.object({
+        day: z.number().int().positive(),
+        place: z.string().optional(),
+        ...bilingual('title'),
+      }),
+    )
+    .default([]),
+  ...listable,
+});
+
+export const attractionSchema = z.object({
+  slug: z.string().min(1),
+  ...bilingual('name'),
+  region: z.string().optional(),
+  image: z.string().min(1),
+  ...bilingual('alt', { required: false }), // image alt text; falls back to name
+  ...bilingual('blurb', { required: false }),
+  credit: z.string().optional(),
   ...listable,
 });
 

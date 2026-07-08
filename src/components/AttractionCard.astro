@@ -1,0 +1,22 @@
+---
+import { localizedField } from '../content/queries';
+import type { Locale } from '../i18n/utils';
+
+interface Props {
+  attraction: Record<string, any>;
+  locale: Locale;
+}
+
+const { attraction, locale } = Astro.props;
+const name = localizedField(attraction, 'name', locale);
+const blurb = localizedField(attraction, 'blurb', locale);
+const alt = localizedField(attraction, 'alt', locale) || name;
+---
+
+<article class="card media-card attraction-card" data-testid="attraction-card">
+  <img class="media-card__img" src={attraction.image} alt={alt} loading="lazy" decoding="async" />
+  <div class="media-card__body">
+    <h3>{name}</h3>
+    {blurb && <p class="blurb">{blurb}</p>}
+  </div>
+</article>

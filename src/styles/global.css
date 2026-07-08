@@ -291,6 +291,82 @@ a.card:hover {
   background: var(--color-surface);
 }
 
+/* ---- Route highlights as photo tiles --------------------------------- */
+.highlight-grid {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: var(--space-3);
+}
+.highlight {
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius);
+  overflow: hidden;
+  background: var(--color-bg);
+}
+.highlight__media {
+  display: block;
+  width: 100%;
+  aspect-ratio: 4 / 3;
+  object-fit: cover;
+  background: var(--color-surface);
+}
+.highlight__name {
+  display: block;
+  padding: var(--space-2) var(--space-3);
+  font-weight: 600;
+  font-size: 0.95rem;
+}
+
+/* ---- Day-by-day itinerary rows --------------------------------------- */
+.day-list {
+  list-style: none;
+  padding: 0;
+  margin: 0 0 var(--space-4);
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-3);
+}
+.day {
+  display: flex;
+  align-items: stretch;
+  gap: var(--space-3);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius);
+  overflow: hidden;
+  background: var(--color-bg);
+}
+.day__img {
+  width: 6.5rem;
+  flex: 0 0 auto;
+  align-self: stretch;
+  min-height: 4.5rem;
+  object-fit: cover;
+  background: var(--color-surface);
+}
+.day__body {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding: var(--space-2) var(--space-3);
+}
+.day__num {
+  font-size: 0.8rem;
+  color: var(--color-brand-dark);
+  font-weight: 700;
+}
+.day__title {
+  margin: 2px 0 0;
+}
+
+@media (min-width: 640px) {
+  .highlight-grid {
+    grid-template-columns: repeat(auto-fill, minmax(12rem, 1fr));
+  }
+}
+
 /* ---- Route detail & pricing ----------------------------------------- */
 .route-detail .meta {
   color: var(--color-muted);

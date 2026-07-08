@@ -2,7 +2,12 @@
 import { getCollection, render } from 'astro:content';
 import BaseLayout from '../../../layouts/BaseLayout.astro';
 import PricingTable from '../../../components/PricingTable.astro';
-import { localizedField, destinationForRoute } from '../../../content/queries';
+import {
+  localizedField,
+  destinationForRoute,
+  attractionByName,
+  resolvePlace,
+} from '../../../content/queries';
 import { currentLocale } from '../../../i18n/utils';
 import { t } from '../../../i18n/strings';
 
@@ -25,8 +30,27 @@ const priceNote = localizedField(data, 'price_note', locale);
 
 // Hero: the image of the route's primary matching destination region.
 const destinations = (await getCollection('destinations')).map((e) => e.data);
+const attractions = (await getCollection('attractions')).map((e) => e.data);
 const cover = destinationForRoute(destinations, data);
 const coverAlt = cover ? localizedField(cover, 'alt', locale) || localizedField(cover, 'name', locale) : '';
+
+// Each highlight shows its attraction's photo when the label matches one.
+const highlightItems = highlights.map((name) => {
+  const a = attractionByName(attractions, name);
+  return { name, image: a?.image, alt: a ? localizedField(a, 'alt', locale) || name : undefined };
+});
+
+// Structured day-by-day plan; each day may show its place's photo.
+const itineraryDays = (data.itinerary ?? []).map((d) => {
+  const place = resolvePlace(destinations, attractions, d.place);
+  return {
+    day: d.day,
+    title: localizedField(d, 'title', locale),
+    image: place?.image,
+    alt: place ? localizedField(place, 'alt', locale) || localizedField(place, 'name', locale) : undefined,
+  };
+});
+const dayNum = (n: number) => (locale === 'en' ? `Day ${n}` : `第 ${n} 天`);
 ---
 
 <BaseLayout title={title}>
@@ -37,15 +61,39 @@ const coverAlt = cover ? localizedField(cover, 'alt', locale) || localizedField(
     <h1>{title}</h1>
     <p class="meta">{data.days} {dayLabel}{data.regions?.length > 0 && <> · {data.regions.join(' · ')}</>}</p>
 
-    {highlights.length > 0 && (
+    {highlightItems.length > 0 && (
       <section class="highlights">
         <h2>{t(locale, 'routes.highlights')}</h2>
-        <ul class="tags">{highlights.map((h) => <li>{h}</li>)}</ul>
+        <ul class="highlight-grid">
+          {highlightItems.map((h) => (
+            <li class="highlight">
+              {h.image
+                ? <img class="highlight__media" src={h.image} alt={h.alt} loading="lazy" decoding="async" />
+                : <span class="highlight__media highlight__media--empty" aria-hidden="true"></span>}
+              <span class="highlight__name">{h.name}</span>
+            </li>
+          ))}
+        </ul>
       </section>
     )}
 
     <section class="itinerary">
       <h2>{t(locale, 'routes.itinerary')}</h2>
+      {itineraryDays.length > 0 && (
+        <ol class="day-list">
+          {itineraryDays.map((d) => (
+            <li class="day">
+              {d.image
+                ? <img class="day__img" src={d.image} alt={d.alt} loading="lazy" decoding="async" />
+                : <span class="day__img day__img--empty" aria-hidden="true"></span>}
+              <div class="day__body">
+                <span class="day__num">{dayNum(d.day)}</span>
+                <p class="day__title">{d.title}</p>
+              </div>
+            </li>
+          ))}
+        </ol>
+      )}
       <Content />
     </section>
 

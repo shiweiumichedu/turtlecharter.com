@@ -6,6 +6,8 @@ import {
   bySlug,
   resolveRef,
   destinationForRoute,
+  attractionByName,
+  resolvePlace,
   groupByCategory,
   FAQ_CATEGORY_ORDER,
 } from '../../src/content/queries';
@@ -135,5 +137,40 @@ describe('destinationForRoute', () => {
 
   it('returns undefined when the route has no regions', () => {
     expect(destinationForRoute(destinations, {})).toBeUndefined();
+  });
+});
+
+describe('attractionByName', () => {
+  const attractions = [
+    { slug: 'erhai', name_zh: '洱海', name_en: 'Erhai Lake' },
+    { slug: 'yulong', name_zh: '玉龙雪山', name_en: 'Jade Dragon Snow Mountain' },
+  ];
+
+  it('matches a Chinese highlight label', () => {
+    expect(attractionByName(attractions, '洱海')?.slug).toBe('erhai');
+  });
+  it('matches an English highlight label', () => {
+    expect(attractionByName(attractions, 'Jade Dragon Snow Mountain')?.slug).toBe('yulong');
+  });
+  it('returns undefined for an unmatched label (falls back to text)', () => {
+    expect(attractionByName(attractions, '双廊')).toBeUndefined();
+  });
+});
+
+describe('resolvePlace', () => {
+  const destinations = [{ slug: 'kunming', image: '/d/kunming.jpg' }];
+  const attractions = [{ slug: 'pudacuo', image: '/a/pudacuo.jpg' }];
+
+  it('resolves a destination slug', () => {
+    expect(resolvePlace(destinations, attractions, 'kunming')?.image).toBe('/d/kunming.jpg');
+  });
+  it('falls through to attractions when not a destination', () => {
+    expect(resolvePlace(destinations, attractions, 'pudacuo')?.image).toBe('/a/pudacuo.jpg');
+  });
+  it('returns undefined for an unknown slug', () => {
+    expect(resolvePlace(destinations, attractions, 'nowhere')).toBeUndefined();
+  });
+  it('returns undefined for an absent slug (day with no place)', () => {
+    expect(resolvePlace(destinations, attractions, undefined)).toBeUndefined();
   });
 });

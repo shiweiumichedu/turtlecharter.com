@@ -14,15 +14,33 @@ pricing:
     price_cny: 7200
 price_note_zh: 含油费、过路费、司机食宿；不含门票、住宿、正餐
 price_note_en: Incl. fuel, tolls, driver's meals & lodging; excl. tickets, hotels, meals
+itinerary:
+  - day: 1
+    place: kunming
+    title_zh: 昆明抵达
+    title_en: Arrive Kunming
+  - day: 2
+    place: dali
+    title_zh: 昆明 → 大理
+    title_en: Kunming → Dali
+  - day: 3
+    place: lijiang
+    title_zh: 大理 → 丽江
+    title_en: Dali → Lijiang
+  - day: 4
+    place: shangri-la
+    title_zh: 丽江 → 香格里拉
+    title_en: Lijiang → Shangri-La
+  - day: 5
+    place: pudacuo
+    title_zh: 香格里拉 · 普达措
+    title_en: Pudacuo, Shangri-La
+  - day: 6
+    title_zh: 返程
+    title_en: Departure
 featured: true
 order: 1
 ---
 
-## 行程 Itinerary
-
-- Day 1 · 昆明抵达 / Arrive Kunming
-- Day 2 · 昆明 → 大理 / Kunming → Dali
-- Day 3 · 大理 → 丽江 / Dali → Lijiang
-- Day 4 · 丽江 → 香格里拉 / Lijiang → Shangri-La
-- Day 5 · 香格里拉 普达措 / Pudacuo, Shangri-La
-- Day 6 · 返程 / Departure
+六天经典环线，串联昆明、大理、丽江、香格里拉四地精华，节奏从容。
+A relaxed six-day loop linking the highlights of Kunming, Dali, Lijiang, and Shangri-La.
