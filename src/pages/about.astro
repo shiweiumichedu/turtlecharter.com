@@ -1,0 +1,38 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import { currentLocale, localizedUrl } from '../i18n/utils';
+
+const locale = currentLocale(Astro.url.pathname);
+const contactHref = localizedUrl('/contact', locale);
+---
+
+<BaseLayout title="关于我们" description="云南龟途包车：专为海外游客打造的纯玩私人包车服务。">
+  <article class="about">
+    <h1>关于我们</h1>
+    <p class="lead">
+      云南龟途包车是专为海外游客打造的私人包车纯玩服务。我们相信旅行应当纯粹——
+      专属车辆、熟悉当地的司机向导、灵活自由的路线，全程没有任何购物环节。
+    </p>
+
+    <section class="about-section">
+      <h2>为什么选择我们</h2>
+      <ul class="value-props">
+        <li>专属车辆，不与陌生人拼车</li>
+        <li>当地司机向导，熟悉路线与风土人情</li>
+        <li>灵活路线，按你的节奏与兴趣定制</li>
+        <li>纯玩无购物，行程不含任何强制消费</li>
+        <li>价格透明，含油费、过路费与司机食宿</li>
+      </ul>
+    </section>
+
+    <section class="about-section">
+      <h2>预订流程</h2>
+      <ol class="steps">
+        <li>通过<a href={contactHref}>联系我们</a>告诉我们你的日期、人数和兴趣</li>
+        <li>我们免费为你定制行程方案与报价</li>
+        <li>确认行程与车辆</li>
+        <li>出发，开启纯玩之旅</li>
+      </ol>
+    </section>
+  </article>
+</BaseLayout>
