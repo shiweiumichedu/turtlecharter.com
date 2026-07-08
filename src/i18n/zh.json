@@ -45,5 +45,16 @@
   "faq.category.general": "其他",
   "testimonials.route": "路线",
   "testimonials.driver": "司机",
-  "testimonials.featured": "客户怎么说"
+  "testimonials.featured": "客户怎么说",
+  "inquiry.name": "称呼",
+  "inquiry.email": "邮箱",
+  "inquiry.wechat": "微信 / 电话",
+  "inquiry.dates": "出行日期",
+  "inquiry.party": "人数",
+  "inquiry.interests": "感兴趣的路线或景点",
+  "inquiry.message": "留言",
+  "inquiry.submit": "发送咨询",
+  "inquiry.consent": "我们仅使用您提供的信息回复本次咨询，不会用于其他用途。",
+  "inquiry.error": "请填写称呼，并至少留下一种联系方式（邮箱或微信/电话）。",
+  "inquiry.subject": "云南包车咨询"
 }
