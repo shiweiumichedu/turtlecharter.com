@@ -18,6 +18,21 @@ describe('driverSchema', () => {
     const r = driverSchema.safeParse({ slug: 'lao-li', name_zh: '老李' });
     expect(r.success).toBe(true);
   });
+
+  it('captures optional bilingual bio fields', () => {
+    const r = driverSchema.safeParse({
+      slug: 'lao-li',
+      name_zh: '老李',
+      bio_zh: '中文简介',
+      bio_en: 'English bio',
+    });
+    expect(r.success).toBe(true);
+    expect(r.success && r.data.bio_en).toBe('English bio');
+  });
+
+  it('remains valid with no bio fields', () => {
+    expect(driverSchema.safeParse({ slug: 'lao-li', name_zh: '老李' }).success).toBe(true);
+  });
 });
 
 describe('vehicleSchema', () => {

@@ -16,5 +16,18 @@
   "footer.email": "邮箱",
   "footer.wechat": "微信",
   "footer.quickLinks": "快速链接",
-  "footer.rights": "版权所有"
+  "footer.rights": "版权所有",
+  "drivers.languages": "语言",
+  "drivers.experience": "驾龄",
+  "drivers.years": "年",
+  "drivers.regions": "熟悉区域",
+  "drivers.specialties": "擅长",
+  "drivers.drives": "常用车辆",
+  "drivers.viewProfile": "查看详情",
+  "vehicles.perDay": "/天",
+  "vehicles.seats": "座",
+  "vehicles.type.sedan": "轿车",
+  "vehicles.type.suv": "SUV",
+  "vehicles.type.van": "商务车",
+  "vehicles.type.minibus": "中巴"
 }
