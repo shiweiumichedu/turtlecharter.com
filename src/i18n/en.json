@@ -45,5 +45,16 @@
   "faq.category.general": "General",
   "testimonials.route": "Route",
   "testimonials.driver": "Driver",
-  "testimonials.featured": "What guests say"
+  "testimonials.featured": "What guests say",
+  "inquiry.name": "Your name",
+  "inquiry.email": "Email",
+  "inquiry.wechat": "WeChat / phone",
+  "inquiry.dates": "Travel dates",
+  "inquiry.party": "Party size",
+  "inquiry.interests": "Routes or sights you're interested in",
+  "inquiry.message": "Message",
+  "inquiry.submit": "Send inquiry",
+  "inquiry.consent": "We use the details you provide only to reply to this inquiry, nothing else.",
+  "inquiry.error": "Please enter your name and at least one contact method (email or WeChat/phone).",
+  "inquiry.subject": "Yunnan charter inquiry"
 }

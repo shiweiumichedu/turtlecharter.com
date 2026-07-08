@@ -2,13 +2,13 @@
 import { currentLocale, localizedUrl } from '../i18n/utils';
 import { t } from '../i18n/strings';
 import { navItems } from '../i18n/nav';
+import { CONTACT_EMAIL, CONTACT_WECHAT } from '../lib/contact';
 
 const path = Astro.url.pathname;
 const locale = currentLocale(path);
 
-// Contact channels: email + WeChat only (no WhatsApp, per business preference).
-const email = 'hello@turtlecharter.com';
-const wechat = 'TurtleCharter';
+const email = CONTACT_EMAIL;
+const wechat = CONTACT_WECHAT;
 ---
 
 <footer class="site-footer" data-testid="site-footer">

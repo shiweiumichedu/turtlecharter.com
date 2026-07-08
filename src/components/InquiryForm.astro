@@ -1,0 +1,98 @@
+---
+import { currentLocale } from '../i18n/utils';
+import { t } from '../i18n/strings';
+import { CONTACT_EMAIL } from '../lib/contact';
+
+const locale = currentLocale(Astro.url.pathname);
+const mailtoBase = `mailto:${CONTACT_EMAIL}`;
+const subject = t(locale, 'inquiry.subject');
+---
+
+<form
+  class="inquiry-form"
+  data-testid="inquiry-form"
+  method="post"
+  enctype="text/plain"
+  action={mailtoBase}
+  data-to={CONTACT_EMAIL}
+  data-subject={subject}
+  novalidate
+>
+  <p class="field">
+    <label for="inq-name">{t(locale, 'inquiry.name')} *</label>
+    <input id="inq-name" name="name" type="text" required data-label={t(locale, 'inquiry.name')} />
+  </p>
+
+  <p class="field">
+    <label for="inq-email">{t(locale, 'inquiry.email')}</label>
+    <input id="inq-email" name="email" type="email" data-label={t(locale, 'inquiry.email')} />
+  </p>
+
+  <p class="field">
+    <label for="inq-wechat">{t(locale, 'inquiry.wechat')}</label>
+    <input id="inq-wechat" name="wechat" type="text" data-label={t(locale, 'inquiry.wechat')} />
+  </p>
+
+  <p class="field">
+    <label for="inq-dates">{t(locale, 'inquiry.dates')}</label>
+    <input id="inq-dates" name="dates" type="text" data-label={t(locale, 'inquiry.dates')} />
+  </p>
+
+  <p class="field">
+    <label for="inq-party">{t(locale, 'inquiry.party')}</label>
+    <input id="inq-party" name="party" type="number" min="1" data-label={t(locale, 'inquiry.party')} />
+  </p>
+
+  <p class="field">
+    <label for="inq-interests">{t(locale, 'inquiry.interests')}</label>
+    <input id="inq-interests" name="interests" type="text" data-label={t(locale, 'inquiry.interests')} />
+  </p>
+
+  <p class="field">
+    <label for="inq-message">{t(locale, 'inquiry.message')}</label>
+    <textarea id="inq-message" name="message" rows="4" data-label={t(locale, 'inquiry.message')}></textarea>
+  </p>
+
+  <p class="inquiry-error" data-testid="inquiry-error" role="alert" aria-live="polite" hidden>
+    {t(locale, 'inquiry.error')}
+  </p>
+
+  <button type="submit">{t(locale, 'inquiry.submit')}</button>
+
+  <p class="inquiry-consent">{t(locale, 'inquiry.consent')}</p>
+</form>
+
+<script>
+  import { buildInquiryMailto } from '../lib/inquiry';
+
+  const form = document.querySelector<HTMLFormElement>('[data-testid="inquiry-form"]');
+  if (form) {
+    const error = form.querySelector<HTMLElement>('[data-testid="inquiry-error"]');
+    form.addEventListener('submit', (event) => {
+      event.preventDefault();
+
+      const inputs = Array.from(
+        form.querySelectorAll<HTMLInputElement | HTMLTextAreaElement>('[data-label]'),
+      );
+      const valueOf = (name: string) =>
+        (inputs.find((el) => el.name === name)?.value ?? '').trim();
+
+      const hasName = valueOf('name') !== '';
+      const hasContact = valueOf('email') !== '' || valueOf('wechat') !== '';
+      if (!hasName || !hasContact) {
+        if (error) error.hidden = false;
+        return;
+      }
+      if (error) error.hidden = true;
+
+      const fields = inputs.map((el) => ({ label: el.dataset.label ?? el.name, value: el.value }));
+      const url = buildInquiryMailto({
+        to: form.dataset.to ?? '',
+        subject: form.dataset.subject ?? '',
+        fields,
+      });
+      form.dataset.lastMailto = url;
+      window.location.href = url;
+    });
+  }
+</script>
