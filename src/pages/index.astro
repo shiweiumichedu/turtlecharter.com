@@ -1,5 +1,13 @@
 ---
+import { getCollection } from 'astro:content';
 import BaseLayout from '../layouts/BaseLayout.astro';
+import RouteCard from '../components/RouteCard.astro';
+import { byOrder, featured } from '../content/queries';
+import { currentLocale } from '../i18n/utils';
+import { t } from '../i18n/strings';
+
+const locale = currentLocale(Astro.url.pathname);
+const featuredRoutes = byOrder(featured((await getCollection('routes')).map((e) => e.data)));
 ---
 
 <BaseLayout>
@@ -7,4 +15,13 @@ import BaseLayout from '../layouts/BaseLayout.astro';
     <h1>一站式纯玩 · 云南私人包车游</h1>
     <p>专为海外游客打造的云南包车纯玩服务：专属车辆、当地司机向导、灵活路线、无购物。</p>
   </section>
+
+  {featuredRoutes.length > 0 && (
+    <section class="featured-routes">
+      <h2>{t(locale, 'routes.featured')}</h2>
+      <div class="card-grid">
+        {featuredRoutes.map((r) => <RouteCard route={r} locale={locale} />)}
+      </div>
+    </section>
+  )}
 </BaseLayout>

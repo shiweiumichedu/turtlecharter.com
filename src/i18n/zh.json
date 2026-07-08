@@ -29,5 +29,13 @@
   "vehicles.type.sedan": "轿车",
   "vehicles.type.suv": "SUV",
   "vehicles.type.van": "商务车",
-  "vehicles.type.minibus": "中巴"
+  "vehicles.type.minibus": "中巴",
+  "routes.day": "天",
+  "routes.days": "天",
+  "routes.highlights": "行程亮点",
+  "routes.itinerary": "行程安排",
+  "routes.featured": "精选路线",
+  "pricing.from": "起",
+  "pricing.mode.package": "套餐总价",
+  "pricing.mode.per_day": "每日价"
 }

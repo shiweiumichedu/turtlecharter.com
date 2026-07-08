@@ -241,6 +241,59 @@ a.card:hover {
   font-size: 0.85rem;
   margin: var(--space-1) 0 0;
 }
+.route-card .from {
+  margin: var(--space-2) 0 0;
+  font-size: 1.1rem;
+  color: var(--color-brand-dark);
+}
+.route-card .from span {
+  color: var(--color-muted);
+  font-size: 0.9rem;
+}
+
+/* ---- Route detail & pricing ----------------------------------------- */
+.route-detail .meta {
+  color: var(--color-muted);
+  margin: 0 0 var(--space-4);
+}
+.route-detail section {
+  margin: var(--space-4) 0;
+}
+.pricing-table {
+  margin: var(--space-4) 0;
+  padding: var(--space-3) var(--space-4);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius);
+  background: var(--color-surface);
+}
+.pricing-table .pricing-mode {
+  margin: 0 0 var(--space-2);
+  font-weight: 600;
+}
+.pricing-table table {
+  width: 100%;
+  border-collapse: collapse;
+}
+.pricing-table th {
+  text-align: left;
+  font-weight: 400;
+  padding: var(--space-1) 0;
+}
+.pricing-table td {
+  text-align: right;
+  padding: var(--space-1) 0;
+  color: var(--color-brand-dark);
+  font-weight: 600;
+}
+.pricing-table .note {
+  color: var(--color-muted);
+  font-size: 0.85rem;
+  margin: var(--space-2) 0 0;
+}
+
+.featured-routes {
+  margin-top: var(--space-6);
+}
 
 .driver-detail p {
   margin: 0 0 var(--space-2);

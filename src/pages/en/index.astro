@@ -1,5 +1,13 @@
 ---
+import { getCollection } from 'astro:content';
 import BaseLayout from '../../layouts/BaseLayout.astro';
+import RouteCard from '../../components/RouteCard.astro';
+import { byOrder, featured } from '../../content/queries';
+import { currentLocale } from '../../i18n/utils';
+import { t } from '../../i18n/strings';
+
+const locale = currentLocale(Astro.url.pathname);
+const featuredRoutes = byOrder(featured((await getCollection('routes')).map((e) => e.data)));
 ---
 
 <BaseLayout>
@@ -8,4 +16,13 @@ import BaseLayout from '../../layouts/BaseLayout.astro';
     <p>A pure-play Yunnan charter service built for overseas travelers: a dedicated
       vehicle, a local driver-guide, flexible routes, and zero shopping stops.</p>
   </section>
+
+  {featuredRoutes.length > 0 && (
+    <section class="featured-routes">
+      <h2>{t(locale, 'routes.featured')}</h2>
+      <div class="card-grid">
+        {featuredRoutes.map((r) => <RouteCard route={r} locale={locale} />)}
+      </div>
+    </section>
+  )}
 </BaseLayout>

@@ -1,0 +1,51 @@
+---
+import { getCollection, render } from 'astro:content';
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import PricingTable from '../../components/PricingTable.astro';
+import { localizedField } from '../../content/queries';
+import { currentLocale } from '../../i18n/utils';
+import { t } from '../../i18n/strings';
+
+export async function getStaticPaths() {
+  const routes = await getCollection('routes');
+  return routes.map((route) => ({ params: { slug: route.data.slug }, props: { route } }));
+}
+
+const { route } = Astro.props;
+const data = route.data;
+const locale = currentLocale(Astro.url.pathname);
+
+const { Content } = await render(route);
+
+const title = localizedField(data, 'title', locale);
+const dayLabel = t(locale, data.days === 1 ? 'routes.day' : 'routes.days');
+const highlights: string[] =
+  locale === 'en' && data.highlights_en?.length ? data.highlights_en : data.highlights_zh ?? [];
+const priceNote = localizedField(data, 'price_note', locale);
+---
+
+<BaseLayout title={title}>
+  <article class="route-detail">
+    <h1>{title}</h1>
+    <p class="meta">{data.days} {dayLabel}{data.regions?.length > 0 && <> · {data.regions.join(' · ')}</>}</p>
+
+    {highlights.length > 0 && (
+      <section class="highlights">
+        <h2>{t(locale, 'routes.highlights')}</h2>
+        <ul class="tags">{highlights.map((h) => <li>{h}</li>)}</ul>
+      </section>
+    )}
+
+    <section class="itinerary">
+      <h2>{t(locale, 'routes.itinerary')}</h2>
+      <Content />
+    </section>
+
+    <PricingTable
+      pricing={data.pricing}
+      pricingMode={data.pricing_mode}
+      note={priceNote}
+      locale={locale}
+    />
+  </article>
+</BaseLayout>
