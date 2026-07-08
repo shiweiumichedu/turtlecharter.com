@@ -37,5 +37,13 @@
   "routes.featured": "精选路线",
   "pricing.from": "起",
   "pricing.mode.package": "套餐总价",
-  "pricing.mode.per_day": "每日价"
+  "pricing.mode.per_day": "每日价",
+  "faq.category.pricing": "价格",
+  "faq.category.booking": "预订",
+  "faq.category.logistics": "行程安排",
+  "faq.category.payment": "支付",
+  "faq.category.general": "其他",
+  "testimonials.route": "路线",
+  "testimonials.driver": "司机",
+  "testimonials.featured": "客户怎么说"
 }

@@ -1,0 +1,40 @@
+---
+import { getCollection } from 'astro:content';
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import TestimonialCard from '../../components/TestimonialCard.astro';
+import { byOrder, localizedField, resolveRef } from '../../content/queries';
+import { currentLocale, localizedUrl } from '../../i18n/utils';
+import { t } from '../../i18n/strings';
+
+const locale = currentLocale(Astro.url.pathname);
+const testimonials = byOrder((await getCollection('testimonials')).map((e) => e.data));
+const routes = (await getCollection('routes')).map((e) => e.data);
+const drivers = (await getCollection('drivers')).map((e) => e.data);
+
+function routeLink(slug: string | undefined) {
+  const route = resolveRef(routes, slug);
+  return route
+    ? { href: localizedUrl(`/routes/${route.slug}`, locale), label: localizedField(route, 'title', locale) }
+    : null;
+}
+function driverLink(slug: string | undefined) {
+  const driver = resolveRef(drivers, slug);
+  return driver
+    ? { href: localizedUrl(`/drivers/${driver.slug}`, locale), label: localizedField(driver, 'name', locale) }
+    : null;
+}
+---
+
+<BaseLayout title={t(locale, 'nav.testimonials')}>
+  <h1>{t(locale, 'nav.testimonials')}</h1>
+  <div class="card-grid">
+    {testimonials.map((tm) => (
+      <TestimonialCard
+        testimonial={tm}
+        route={routeLink(tm.route)}
+        driver={driverLink(tm.driver)}
+        locale={locale}
+      />
+    ))}
+  </div>
+</BaseLayout>
