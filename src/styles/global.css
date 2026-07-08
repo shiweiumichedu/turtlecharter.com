@@ -177,6 +177,85 @@ img {
   font-size: 0.85rem;
 }
 
+/* ---- Cards & grids ---------------------------------------------------- */
+.card-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: var(--space-4);
+  margin-top: var(--space-4);
+}
+
+.card {
+  display: block;
+  padding: var(--space-4);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius);
+  background: var(--color-bg);
+}
+.card h3 {
+  margin-bottom: var(--space-2);
+}
+a.card {
+  color: inherit;
+}
+a.card:hover {
+  text-decoration: none;
+  border-color: var(--color-brand);
+}
+
+.card .meta,
+.card .langs {
+  color: var(--color-muted);
+  margin: 0 0 var(--space-2);
+}
+.card .tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-2);
+  list-style: none;
+  padding: 0;
+  margin: 0 0 var(--space-3);
+}
+.card .tags li {
+  padding: 2px var(--space-2);
+  background: var(--color-surface);
+  border-radius: var(--radius);
+  font-size: 0.85rem;
+}
+.card .tags-inline {
+  color: var(--color-muted);
+  font-size: 0.9rem;
+  margin: 0;
+}
+.vehicle-card .rate {
+  margin: var(--space-2) 0 0;
+  font-size: 1.1rem;
+  color: var(--color-brand-dark);
+}
+.vehicle-card .rate span {
+  color: var(--color-muted);
+  font-size: 0.9rem;
+}
+.vehicle-card .note {
+  color: var(--color-muted);
+  font-size: 0.85rem;
+  margin: var(--space-1) 0 0;
+}
+
+.driver-detail p {
+  margin: 0 0 var(--space-2);
+}
+.driver-detail .bio {
+  margin: var(--space-3) 0;
+  color: var(--color-fg);
+}
+
+@media (min-width: 640px) {
+  .card-grid {
+    grid-template-columns: repeat(auto-fill, minmax(16rem, 1fr));
+  }
+}
+
 /* ---- Sticky mobile inquiry CTA --------------------------------------- */
 .sticky-cta {
   position: fixed;

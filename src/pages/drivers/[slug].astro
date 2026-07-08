@@ -1,0 +1,48 @@
+---
+import { getCollection } from 'astro:content';
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import { localizedField, resolveRef } from '../../content/queries';
+import { currentLocale } from '../../i18n/utils';
+import { t } from '../../i18n/strings';
+
+export async function getStaticPaths() {
+  const drivers = await getCollection('drivers');
+  return drivers.map((d) => ({ params: { slug: d.data.slug }, props: { driver: d.data } }));
+}
+
+const { driver } = Astro.props;
+const locale = currentLocale(Astro.url.pathname);
+
+const vehicles = (await getCollection('vehicles')).map((e) => e.data);
+const vehicle = resolveRef(vehicles, driver.vehicle);
+
+const name = localizedField(driver, 'name', locale);
+const bio = localizedField(driver, 'bio', locale);
+const specialties: string[] =
+  locale === 'en' && driver.specialties_en?.length
+    ? driver.specialties_en
+    : driver.specialties_zh ?? [];
+const vehicleName = vehicle ? localizedField(vehicle, 'name', locale) : null;
+---
+
+<BaseLayout title={name}>
+  <article class="driver-detail">
+    <h1>{name}</h1>
+    {driver.languages?.length > 0 && (
+      <p><strong>{t(locale, 'drivers.languages')}:</strong> {driver.languages.join(' · ')}</p>
+    )}
+    {driver.years_experience != null && (
+      <p><strong>{t(locale, 'drivers.experience')}:</strong> {driver.years_experience} {t(locale, 'drivers.years')}</p>
+    )}
+    {driver.regions?.length > 0 && (
+      <p><strong>{t(locale, 'drivers.regions')}:</strong> {driver.regions.join(' · ')}</p>
+    )}
+    {specialties.length > 0 && (
+      <p><strong>{t(locale, 'drivers.specialties')}:</strong> {specialties.join(' · ')}</p>
+    )}
+    {bio && <p class="bio">{bio}</p>}
+    {vehicleName && (
+      <p><strong>{t(locale, 'drivers.drives')}:</strong> {vehicleName}</p>
+    )}
+  </article>
+</BaseLayout>

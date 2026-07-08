@@ -28,6 +28,7 @@ export const driverSchema = z.object({
   vehicle: z.string().optional(), // ref: vehicles.slug
   specialties_zh: z.array(z.string()).default([]),
   specialties_en: z.array(z.string()).default([]),
+  ...bilingual('bio', { required: false }),
   ...listable,
 });
 

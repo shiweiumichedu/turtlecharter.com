@@ -16,5 +16,18 @@
   "footer.email": "Email",
   "footer.wechat": "WeChat",
   "footer.quickLinks": "Quick links",
-  "footer.rights": "All rights reserved"
+  "footer.rights": "All rights reserved",
+  "drivers.languages": "Languages",
+  "drivers.experience": "Experience",
+  "drivers.years": "years",
+  "drivers.regions": "Regions",
+  "drivers.specialties": "Specialties",
+  "drivers.drives": "Vehicle",
+  "drivers.viewProfile": "View profile",
+  "vehicles.perDay": "/day",
+  "vehicles.seats": "seats",
+  "vehicles.type.sedan": "Sedan",
+  "vehicles.type.suv": "SUV",
+  "vehicles.type.van": "Van",
+  "vehicles.type.minibus": "Minibus"
 }
