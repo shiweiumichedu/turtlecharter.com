@@ -2,12 +2,29 @@
 import { getCollection } from 'astro:content';
 import BaseLayout from '../layouts/BaseLayout.astro';
 import RouteCard from '../components/RouteCard.astro';
-import { byOrder, featured } from '../content/queries';
-import { currentLocale } from '../i18n/utils';
+import TestimonialCard from '../components/TestimonialCard.astro';
+import { byOrder, featured, localizedField, resolveRef } from '../content/queries';
+import { currentLocale, localizedUrl } from '../i18n/utils';
 import { t } from '../i18n/strings';
 
 const locale = currentLocale(Astro.url.pathname);
 const featuredRoutes = byOrder(featured((await getCollection('routes')).map((e) => e.data)));
+const featuredTestimonials = byOrder(featured((await getCollection('testimonials')).map((e) => e.data)));
+const routes = (await getCollection('routes')).map((e) => e.data);
+const drivers = (await getCollection('drivers')).map((e) => e.data);
+
+function routeLink(slug: string | undefined) {
+  const route = resolveRef(routes, slug);
+  return route
+    ? { href: localizedUrl(`/routes/${route.slug}`, locale), label: localizedField(route, 'title', locale) }
+    : null;
+}
+function driverLink(slug: string | undefined) {
+  const driver = resolveRef(drivers, slug);
+  return driver
+    ? { href: localizedUrl(`/drivers/${driver.slug}`, locale), label: localizedField(driver, 'name', locale) }
+    : null;
+}
 ---
 
 <BaseLayout>
@@ -21,6 +38,22 @@ const featuredRoutes = byOrder(featured((await getCollection('routes')).map((e) 
       <h2>{t(locale, 'routes.featured')}</h2>
       <div class="card-grid">
         {featuredRoutes.map((r) => <RouteCard route={r} locale={locale} />)}
+      </div>
+    </section>
+  )}
+
+  {featuredTestimonials.length > 0 && (
+    <section class="featured-testimonials">
+      <h2>{t(locale, 'testimonials.featured')}</h2>
+      <div class="card-grid">
+        {featuredTestimonials.map((tm) => (
+          <TestimonialCard
+            testimonial={tm}
+            route={routeLink(tm.route)}
+            driver={driverLink(tm.driver)}
+            locale={locale}
+          />
+        ))}
       </div>
     </section>
   )}

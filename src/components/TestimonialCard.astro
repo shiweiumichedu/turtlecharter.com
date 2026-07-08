@@ -1,0 +1,37 @@
+---
+import { localizedField } from '../content/queries';
+import { stars } from '../lib/rating';
+import { t } from '../i18n/strings';
+import type { Locale } from '../i18n/utils';
+
+interface Link {
+  href: string;
+  label: string;
+}
+
+interface Props {
+  testimonial: Record<string, any>;
+  route?: Link | null;
+  driver?: Link | null;
+  locale: Locale;
+}
+
+const { testimonial, route = null, driver = null, locale } = Astro.props;
+const author = localizedField(testimonial, 'author', locale);
+const quote = localizedField(testimonial, 'quote', locale);
+const rating = stars(testimonial.rating);
+---
+
+<article class="card testimonial-card" data-testid="testimonial-card">
+  <p class="stars" aria-label={`${testimonial.rating} / 5`}>
+    {rating.map((filled) => <span aria-hidden="true">{filled ? '★' : '☆'}</span>)}
+  </p>
+  <blockquote class="quote">{quote}</blockquote>
+  <p class="author">— {author}</p>
+  {(route || driver) && (
+    <p class="refs">
+      {route && <a href={route.href}>{t(locale, 'testimonials.route')}: {route.label}</a>}
+      {driver && <a href={driver.href}>{t(locale, 'testimonials.driver')}: {driver.label}</a>}
+    </p>
+  )}
+</article>

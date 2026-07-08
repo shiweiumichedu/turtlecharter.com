@@ -45,3 +45,30 @@ export function resolveRef<T extends { slug: string }>(
 ): T | undefined {
   return slug === undefined ? undefined : items.find((item) => item.slug === slug);
 }
+
+/** Display order for FAQ categories; must cover every `faqSchema` category enum value. */
+export const FAQ_CATEGORY_ORDER = [
+  'pricing',
+  'booking',
+  'logistics',
+  'payment',
+  'general',
+] as const;
+
+export interface CategoryGroup<T> {
+  category: string;
+  items: T[];
+}
+
+/**
+ * Bucket FAQ entries into groups following `FAQ_CATEGORY_ORDER`, with each group's
+ * items sorted by `order`. Categories with no entries are omitted.
+ */
+export function groupByCategory<T extends { category?: string; order?: number }>(
+  entries: readonly T[],
+): CategoryGroup<T>[] {
+  return FAQ_CATEGORY_ORDER.map((category) => ({
+    category,
+    items: byOrder(entries.filter((entry) => entry.category === category)),
+  })).filter((group) => group.items.length > 0);
+}

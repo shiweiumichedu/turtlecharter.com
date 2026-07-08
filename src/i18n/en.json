@@ -37,5 +37,13 @@
   "routes.featured": "Featured routes",
   "pricing.from": "from",
   "pricing.mode.package": "Package price",
-  "pricing.mode.per_day": "Per-day price"
+  "pricing.mode.per_day": "Per-day price",
+  "faq.category.pricing": "Pricing",
+  "faq.category.booking": "Booking",
+  "faq.category.logistics": "Logistics",
+  "faq.category.payment": "Payment",
+  "faq.category.general": "General",
+  "testimonials.route": "Route",
+  "testimonials.driver": "Driver",
+  "testimonials.featured": "What guests say"
 }

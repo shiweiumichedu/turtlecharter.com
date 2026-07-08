@@ -294,6 +294,46 @@ a.card:hover {
 .featured-routes {
   margin-top: var(--space-6);
 }
+.featured-testimonials {
+  margin-top: var(--space-6);
+}
+
+/* ---- Testimonials --------------------------------------------------- */
+.testimonial-card .stars {
+  color: var(--color-accent);
+  margin: 0 0 var(--space-2);
+  letter-spacing: 2px;
+}
+.testimonial-card .quote {
+  margin: 0 0 var(--space-2);
+  border: 0;
+  padding: 0;
+  font-style: italic;
+}
+.testimonial-card .author {
+  color: var(--color-muted);
+  margin: 0 0 var(--space-2);
+}
+.testimonial-card .refs {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-3);
+  font-size: 0.85rem;
+  margin: 0;
+}
+
+/* ---- FAQ ------------------------------------------------------------ */
+.faq-group {
+  margin: var(--space-4) 0;
+}
+.faq-group dt {
+  font-weight: 600;
+  margin-top: var(--space-3);
+}
+.faq-group dd {
+  margin: var(--space-1) 0 0;
+  color: var(--color-fg);
+}
 
 .driver-detail p {
   margin: 0 0 var(--space-2);

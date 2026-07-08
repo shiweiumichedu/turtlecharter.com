@@ -1,5 +1,14 @@
 import { describe, it, expect } from 'vitest';
-import { localizedField, byOrder, featured, bySlug, resolveRef } from '../../src/content/queries';
+import {
+  localizedField,
+  byOrder,
+  featured,
+  bySlug,
+  resolveRef,
+  groupByCategory,
+  FAQ_CATEGORY_ORDER,
+} from '../../src/content/queries';
+import { faqSchema } from '../../src/content/schemas';
 
 describe('localizedField', () => {
   const data = { name_zh: '老李', name_en: 'Lao Li', bio_zh: '经验丰富' };
@@ -67,5 +76,37 @@ describe('resolveRef', () => {
   });
   it('returns undefined for an absent (undefined) reference', () => {
     expect(resolveRef(vehicles, undefined)).toBeUndefined();
+  });
+});
+
+describe('groupByCategory (FAQ)', () => {
+  const entries = [
+    { category: 'booking', order: 2, question_zh: 'b2' },
+    { category: 'pricing', order: 2, question_zh: 'p2' },
+    { category: 'pricing', order: 1, question_zh: 'p1' },
+    { category: 'booking', order: 1, question_zh: 'b1' },
+  ];
+
+  it('returns groups in the fixed category order', () => {
+    const groups = groupByCategory(entries);
+    expect(groups.map((g) => g.category)).toEqual(['pricing', 'booking']);
+  });
+
+  it('sorts entries within each group by order', () => {
+    const groups = groupByCategory(entries);
+    const pricing = groups.find((g) => g.category === 'pricing');
+    expect(pricing?.items.map((i) => i.question_zh)).toEqual(['p1', 'p2']);
+  });
+
+  it('drops categories with no entries', () => {
+    const groups = groupByCategory([{ category: 'general', order: 1 }]);
+    expect(groups.map((g) => g.category)).toEqual(['general']);
+  });
+
+  it('covers every faqSchema category enum value', () => {
+    const enumValues = faqSchema.shape.category.options;
+    for (const value of enumValues) {
+      expect(FAQ_CATEGORY_ORDER).toContain(value);
+    }
   });
 });
