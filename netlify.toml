@@ -1,0 +1,18 @@
+# Build settings for turtlecharter.com.
+# Note: production deploys run from GitHub Actions (test-gated) via the Netlify
+# CLI — Netlify's automatic git builds are intentionally left disabled. These
+# settings keep the build reproducible and carry the redirect rules.
+
+[build]
+  command = "npm run build"
+  publish = "dist"
+
+[build.environment]
+  NODE_VERSION = "20"
+
+# Canonical host: redirect the www subdomain to the apex domain.
+[[redirects]]
+  from = "https://www.turtlecharter.com/*"
+  to = "https://turtlecharter.com/:splat"
+  status = 301
+  force = true
