@@ -21,6 +21,9 @@ coverage/
 *.log
 npm-debug.log*
 
+# third-party video transcripts & digests (copyrighted source material — never publish)
+youtube/
+
 # os / editor
 .DS_Store
 .vscode/

@@ -1,4 +1,8 @@
-name: CI & Deploy
+name: CI
+
+# Production deploys are handled by Netlify's native Git integration
+# (Netlify builds and publishes on every push to main). This workflow only
+# runs the test suite so pull requests and pushes stay gated on green tests.
 
 on:
   push:
@@ -23,23 +27,3 @@ jobs:
         run: npx playwright install --with-deps
       - name: End-to-end tests
         run: npm run test:e2e
-
-  deploy:
-    name: Deploy to Netlify
-    needs: test
-    if: github.event_name == 'push' && github.ref == 'refs/heads/main'
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v4
-      - uses: actions/setup-node@v4
-        with:
-          node-version: 20
-          cache: npm
-      - run: npm ci
-      - name: Build
-        run: npm run build
-      - name: Deploy to Netlify (production)
-        run: npx netlify-cli deploy --prod --dir=dist
-        env:
-          NETLIFY_AUTH_TOKEN: ${{ secrets.NETLIFY_AUTH_TOKEN }}
-          NETLIFY_SITE_ID: ${{ secrets.NETLIFY_SITE_ID }}

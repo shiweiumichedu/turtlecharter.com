@@ -1,7 +1,7 @@
 # Build settings for turtlecharter.com.
-# Note: production deploys run from GitHub Actions (test-gated) via the Netlify
-# CLI — Netlify's automatic git builds are intentionally left disabled. These
-# settings keep the build reproducible and carry the redirect rules.
+# Production deploys run from Netlify's native Git integration: Netlify builds
+# and publishes on every push to main using the settings below. GitHub Actions
+# (.github/workflows/deploy.yml) runs the test suite in parallel as a CI gate.
 
 [build]
   command = "npm run build"
