@@ -13,10 +13,16 @@ const name = localizedField(destination, 'name', locale);
 const blurb = localizedField(destination, 'blurb', locale);
 const alt = localizedField(destination, 'alt', locale) || name;
 const email = destination.email;
+const mapUrl = destination.mapUrl;
 ---
 
 <article class="card media-card destination-card" data-testid="destination-card">
   <img class="media-card__img" src={destination.image} alt={alt} loading="lazy" decoding="async" />
+  {mapUrl && (
+    <a class="destination-map" data-testid="destination-map" href={mapUrl} target="_blank" rel="noopener">
+      {t(locale, 'destinations.mapLink')}
+    </a>
+  )}
   <div class="media-card__body">
     <h3>{name}</h3>
     {blurb && <p class="blurb">{blurb}</p>}
@@ -30,6 +36,17 @@ const email = destination.email;
 </article>
 
 <style>
+  .destination-map {
+    display: block;
+    padding: 0.5rem 1rem 0;
+    font-size: 0.85rem;
+    font-weight: 600;
+    color: var(--color-brand-dark, #0a5c4c);
+    text-decoration: none;
+  }
+  .destination-map:hover {
+    text-decoration: underline;
+  }
   .destination-email {
     margin-top: 0.75rem;
     font-size: 0.9rem;

@@ -4,6 +4,7 @@ name_zh: 大理
 name_en: Dali
 region: 大理
 email: dali@turtlecharter.com
+mapUrl: 'https://www.google.com/maps/search/%E5%A4%A7%E7%90%86%E6%99%AF%E7%82%B9/@25.69,100.18,12z/data=!3m1!1e3'
 image: /images/destinations/dali.jpg
 alt_zh: 大理崇圣寺三塔
 alt_en: The Three Pagodas of Chongsheng Temple in Dali

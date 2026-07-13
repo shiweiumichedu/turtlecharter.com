@@ -4,6 +4,7 @@ name_zh: 西双版纳
 name_en: Xishuangbanna
 region: 西双版纳
 email: banna@turtlecharter.com
+mapUrl: 'https://www.google.com/maps/search/%E8%A5%BF%E5%8F%8C%E7%89%88%E7%BA%B3%E6%99%AF%E7%82%B9/@22.01,100.8,12z/data=!3m1!1e3'
 image: /images/destinations/xishuangbanna.jpg
 alt_zh: 西双版纳景洪的傣族南传佛寺，金色立佛与华丽殿宇
 alt_en: A Dai Theravada Buddhist temple with a golden Buddha in Jinghong, Xishuangbanna

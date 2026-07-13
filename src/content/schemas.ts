@@ -93,6 +93,7 @@ export const destinationSchema = z.object({
   ...bilingual('blurb', { required: false }),
   credit: z.string().optional(),
   email: z.string().email().optional(), // per-destination inquiry alias; shown as a mailto on the card
+  mapUrl: z.string().url().optional(), // Google Maps satellite link to the region's sightseeing spots
   ...listable,
 });
 
