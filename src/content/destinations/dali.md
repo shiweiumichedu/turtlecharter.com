@@ -3,6 +3,7 @@ slug: dali
 name_zh: 大理
 name_en: Dali
 region: 大理
+email: dali@turtlecharter.com
 image: /images/destinations/dali.jpg
 alt_zh: 大理崇圣寺三塔
 alt_en: The Three Pagodas of Chongsheng Temple in Dali

@@ -3,6 +3,7 @@ slug: shangri-la
 name_zh: 香格里拉
 name_en: Shangri-La
 region: 香格里拉
+email: shangrila@turtlecharter.com
 image: /images/destinations/shangri-la.jpg
 alt_zh: 香格里拉松赞林寺金顶
 alt_en: The golden roofs of Songzanlin Monastery in Shangri-La

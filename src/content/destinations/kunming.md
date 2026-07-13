@@ -3,6 +3,7 @@ slug: kunming
 name_zh: 昆明
 name_en: Kunming
 region: 昆明
+email: kunming@turtlecharter.com
 image: /images/destinations/kunming.jpg
 alt_zh: 昆明石林喀斯特石峰倒映水中
 alt_en: Karst stone pillars reflected in water at the Stone Forest near Kunming

@@ -3,6 +3,7 @@ slug: lugu-lake
 name_zh: 泸沽湖
 name_en: Lugu Lake
 region: 泸沽湖
+email: luguhu@turtlecharter.com
 image: /images/destinations/lugu-lake.jpg
 alt_zh: 泸沽湖清晨，湖畔停泊的猪槽船与垂柳
 alt_en: Morning at Lugu Lake with a traditional dugout canoe by the willow-lined shore

@@ -1,5 +1,6 @@
 ---
 import { localizedField } from '../content/queries';
+import { t } from '../i18n/strings';
 import type { Locale } from '../i18n/utils';
 
 interface Props {
@@ -11,6 +12,7 @@ const { destination, locale } = Astro.props;
 const name = localizedField(destination, 'name', locale);
 const blurb = localizedField(destination, 'blurb', locale);
 const alt = localizedField(destination, 'alt', locale) || name;
+const email = destination.email;
 ---
 
 <article class="card media-card destination-card" data-testid="destination-card">
@@ -18,5 +20,27 @@ const alt = localizedField(destination, 'alt', locale) || name;
   <div class="media-card__body">
     <h3>{name}</h3>
     {blurb && <p class="blurb">{blurb}</p>}
+    {email && (
+      <p class="destination-email" data-testid="destination-email">
+        <span class="destination-email__label">{t(locale, 'destinations.emailInvite')}</span>
+        <a href={`mailto:${email}`}>{email}</a>
+      </p>
+    )}
   </div>
 </article>
+
+<style>
+  .destination-email {
+    margin-top: 0.75rem;
+    font-size: 0.9rem;
+    line-height: 1.4;
+  }
+  .destination-email__label {
+    display: block;
+    color: var(--color-muted, #666);
+  }
+  .destination-email a {
+    font-weight: 600;
+    word-break: break-all;
+  }
+</style>

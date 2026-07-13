@@ -92,6 +92,7 @@ export const destinationSchema = z.object({
   ...bilingual('alt', { required: false }), // image alt text; falls back to name
   ...bilingual('blurb', { required: false }),
   credit: z.string().optional(),
+  email: z.string().email().optional(), // per-destination inquiry alias; shown as a mailto on the card
   ...listable,
 });
 
