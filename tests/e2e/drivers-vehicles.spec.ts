@@ -22,14 +22,14 @@ test('/drivers lists drivers linking to detail', async ({ page }) => {
   await page.goto('/drivers');
   const cards = page.locator('[data-testid="driver-card"]');
   await expect(cards).toHaveCount(1);
-  await expect(page.locator('body')).toContainText('老李');
+  await expect(page.locator('body')).toContainText('张师傅');
   await expect(page.locator('a[href="/drivers/lao-li"]')).toHaveCount(1);
 });
 
 test('/en/drivers links to English detail with English names', async ({ page }) => {
   await page.goto('/en/drivers');
   await expect(page.locator('html')).toHaveAttribute('lang', 'en');
-  await expect(page.locator('body')).toContainText('Lao Li');
+  await expect(page.locator('body')).toContainText('Master Zhang');
   await expect(page.locator('a[href="/en/drivers/lao-li"]')).toHaveCount(1);
 });
 
@@ -37,7 +37,7 @@ test('/en/drivers links to English detail with English names', async ({ page }) 
 test('/drivers/lao-li shows fields, bio, and resolved vehicle', async ({ page }) => {
   await page.goto('/drivers/lao-li');
   const body = page.locator('body');
-  await expect(body).toContainText('老李');
+  await expect(body).toContainText('张师傅');
   await expect(body).toContainText('English'); // a language
   await expect(body).toContainText('12'); // years
   await expect(body).toContainText('大理'); // a region
@@ -50,7 +50,7 @@ test('/en/drivers/lao-li renders English detail and lang=en', async ({ page }) =
   await page.goto('/en/drivers/lao-li');
   await expect(page.locator('html')).toHaveAttribute('lang', 'en');
   const body = page.locator('body');
-  await expect(body).toContainText('Lao Li');
+  await expect(body).toContainText('Master Zhang');
   await expect(body).toContainText('Photo spots'); // specialty en
   await expect(body).toContainText('twelve years'); // bio_en
   await expect(body).toContainText('HiAce'); // resolved vehicle en name
