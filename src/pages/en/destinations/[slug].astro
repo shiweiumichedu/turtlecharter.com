@@ -1,0 +1,80 @@
+---
+import { getCollection } from 'astro:content';
+import BaseLayout from '../../../layouts/BaseLayout.astro';
+import SpotMap from '../../../components/SpotMap.astro';
+import { localizedField } from '../../../content/queries';
+import { currentLocale, localizedUrl } from '../../../i18n/utils';
+import { t } from '../../../i18n/strings';
+
+export async function getStaticPaths() {
+  const destinations = await getCollection('destinations');
+  return destinations.map((d) => ({ params: { slug: d.data.slug }, props: { destination: d.data } }));
+}
+
+const { destination } = Astro.props;
+const locale = currentLocale(Astro.url.pathname);
+
+const name = localizedField(destination, 'name', locale);
+const blurb = localizedField(destination, 'blurb', locale);
+const alt = localizedField(destination, 'alt', locale) || name;
+const email = destination.email;
+const spots = (destination.spots ?? []).map((s: any) => ({
+  lat: s.lat,
+  lng: s.lng,
+  label: localizedField(s, 'name', locale),
+}));
+---
+
+<BaseLayout title={name}>
+  <article class="destination-detail">
+    <p class="back-link"><a href={localizedUrl('/destinations', locale)}>{t(locale, 'destinations.backToList')}</a></p>
+    <h1>{name}</h1>
+    <img class="destination-detail__img" src={destination.image} alt={alt} />
+    {blurb && <p class="lead">{blurb}</p>}
+
+    {spots.length > 0 && (
+      <section class="destination-map-section">
+        <h2>{t(locale, 'destinations.mapHeading')}</h2>
+        <p class="map-intro">{t(locale, 'destinations.mapIntro')}</p>
+        <SpotMap spots={spots} />
+      </section>
+    )}
+
+    {email && (
+      <p class="destination-detail__email">
+        {t(locale, 'destinations.emailInvite')}
+        <a href={`mailto:${email}`}>{email}</a>
+      </p>
+    )}
+  </article>
+</BaseLayout>
+
+<style>
+  .destination-detail {
+    max-width: 900px;
+    margin: 0 auto;
+    padding: 1.5rem 1rem 3rem;
+  }
+  .destination-detail__img {
+    width: 100%;
+    max-height: 380px;
+    object-fit: cover;
+    border-radius: 12px;
+    margin: 0.5rem 0 1rem;
+  }
+  .back-link {
+    font-size: 0.9rem;
+    margin-bottom: 0.25rem;
+  }
+  .destination-map-section {
+    margin-top: 2rem;
+  }
+  .map-intro {
+    color: var(--color-muted, #5b6470);
+    font-size: 0.92rem;
+    margin-bottom: 0.75rem;
+  }
+  .destination-detail__email {
+    margin-top: 1.5rem;
+  }
+</style>

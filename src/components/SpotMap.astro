@@ -1,0 +1,90 @@
+---
+// Embedded satellite map with custom labeled pins for a destination's sightseeing
+// spots. Uses Leaflet + Esri "World Imagery" tiles (free, no API key).
+export interface MapSpot {
+  lat: number;
+  lng: number;
+  label: string;
+}
+interface Props {
+  spots: MapSpot[];
+  height?: string;
+}
+const { spots, height = '440px' } = Astro.props;
+---
+
+<div
+  class="spot-map"
+  data-testid="spot-map"
+  style={`height:${height}`}
+  data-spots={JSON.stringify(spots)}
+>
+</div>
+
+<script>
+  import L from 'leaflet';
+  import 'leaflet/dist/leaflet.css';
+
+  document.querySelectorAll<HTMLElement>('.spot-map').forEach((el) => {
+    const spots: { lat: number; lng: number; label: string }[] = JSON.parse(
+      el.dataset.spots || '[]',
+    );
+    if (spots.length === 0) return;
+
+    const map = L.map(el, { scrollWheelZoom: false });
+
+    L.tileLayer(
+      'https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}',
+      {
+        maxZoom: 18,
+        attribution:
+          'Tiles &copy; Esri — Esri, Maxar, Earthstar Geographics, and the GIS User Community',
+      },
+    ).addTo(map);
+
+    const points: [number, number][] = [];
+    for (const s of spots) {
+      L.circleMarker([s.lat, s.lng], {
+        radius: 7,
+        color: '#ffffff',
+        weight: 2,
+        fillColor: '#e8a13a',
+        fillOpacity: 1,
+      })
+        .addTo(map)
+        .bindTooltip(s.label, {
+          permanent: true,
+          direction: 'top',
+          className: 'spot-map__label',
+          offset: [0, -6],
+        });
+      points.push([s.lat, s.lng]);
+    }
+
+    map.fitBounds(points, { padding: [45, 45], maxZoom: 14 });
+  });
+</script>
+
+<style>
+  .spot-map {
+    width: 100%;
+    border-radius: 12px;
+    overflow: hidden;
+    border: 1px solid var(--color-border, #e4e7eb);
+    background: var(--color-surface, #f6f8f7);
+  }
+  :global(.spot-map__label) {
+    background: rgba(20, 20, 20, 0.78);
+    color: #fff;
+    border: none;
+    border-radius: 4px;
+    font-size: 0.78rem;
+    font-weight: 600;
+    padding: 2px 7px;
+    box-shadow: none;
+    white-space: nowrap;
+  }
+  :global(.spot-map__label::before) {
+    display: none; /* hide the default tooltip arrow */
+  }
+</style>

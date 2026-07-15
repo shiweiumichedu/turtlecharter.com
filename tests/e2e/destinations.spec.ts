@@ -26,6 +26,15 @@ test('/en/destinations renders English names and lang=en', async ({ page }) => {
   await expect(page.locator('body')).toContainText('Kunming');
 });
 
+test('destination detail page renders the sightseeing map with labeled pins', async ({ page }) => {
+  await page.goto('/destinations/lugu-lake');
+  await expect(page.locator('[data-testid="spot-map"]')).toHaveCount(1);
+  // Labels render client-side from the spot data (no external tiles needed).
+  await expect(page.locator('.spot-map__label')).toHaveCount(7);
+  await expect(page.locator('.spot-map__label', { hasText: '走婚桥' })).toHaveCount(1);
+  await expect(page.locator('.spot-map__label', { hasText: '里格半岛' })).toHaveCount(1);
+});
+
 // ---- Covers wired into route surfaces ----
 test('route cards show a cover image', async ({ page }) => {
   await page.goto('/routes');
