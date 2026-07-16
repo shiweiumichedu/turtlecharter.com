@@ -12,8 +12,8 @@ pricing:
     price_cny: 4800
   - vehicle_type: van
     price_cny: 7200
-price_note_zh: 含油费、过路费、司机食宿；不含门票、住宿、正餐
-price_note_en: Incl. fuel, tolls, driver's meals & lodging; excl. tickets, hotels, meals
+price_note_zh: 含油费、过路费、住宿、门票；不含正餐
+price_note_en: Incl. fuel, tolls, hotels & entrance tickets; excl. meals
 itinerary:
   - day: 1
     place: kunming
