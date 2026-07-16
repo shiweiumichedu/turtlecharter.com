@@ -5,7 +5,7 @@ question_zh: 包车价格包含哪些？
 question_en: What's included in the charter price?
 ---
 
-包车价格通常包含油费、过路费、停车费以及司机的食宿；不含景点门票、住宿和正餐。
+包车价格通常包含油费、过路费、停车费、司机的食宿、景点门票和住宿；不含正餐。
 
-The charter price typically includes fuel, tolls, parking, and the driver's meals
-and lodging. It excludes attraction tickets, your accommodation, and meals.
+The charter price typically includes fuel, tolls, parking, the driver's meals and
+lodging, attraction tickets, and your accommodation. It excludes meals.
