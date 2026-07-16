@@ -32,16 +32,16 @@ test('/routes/dali-day-charter shows itinerary and a per-day pricing table', asy
 });
 
 // ---- Route detail: package pricing ----
-test('/routes/kunming-dali-lijiang-shangri-la shows a package pricing table', async ({ page }) => {
-  await page.goto('/routes/kunming-dali-lijiang-shangri-la');
+test('/routes/kunming-dali-lijiang-lugu-lake shows a package pricing table', async ({ page }) => {
+  await page.goto('/routes/kunming-dali-lijiang-lugu-lake');
   const pricing = page.locator('[data-testid="pricing-table"]');
   await expect(pricing).toContainText('套餐总价'); // package mode label
   await expect(pricing).toContainText('¥4,800');
   await expect(pricing).toContainText('¥7,200');
 });
 
-test('/en/routes/kunming-dali-lijiang-shangri-la renders English mode label and note', async ({ page }) => {
-  await page.goto('/en/routes/kunming-dali-lijiang-shangri-la');
+test('/en/routes/kunming-dali-lijiang-lugu-lake renders English mode label and note', async ({ page }) => {
+  await page.goto('/en/routes/kunming-dali-lijiang-lugu-lake');
   await expect(page.locator('html')).toHaveAttribute('lang', 'en');
   const pricing = page.locator('[data-testid="pricing-table"]');
   await expect(pricing).toContainText('Package price');
