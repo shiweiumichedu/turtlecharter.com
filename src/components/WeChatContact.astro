@@ -1,0 +1,114 @@
+---
+// WeChat contact block for the contact page: ID with a copy chip, plus the
+// friend-add QR code once the exported image exists (WeChat QR codes must come
+// from the app itself — a generated QR encoding the ID would not open the
+// profile when scanned).
+import { existsSync } from 'node:fs';
+import { t } from '../i18n/strings';
+import type { Locale } from '../i18n/utils';
+import { CONTACT_WECHAT, WECHAT_QR_PATH } from '../lib/contact';
+
+interface Props {
+  locale: Locale;
+}
+
+const { locale } = Astro.props;
+const hasQr = existsSync(new URL(`../../public${WECHAT_QR_PATH}`, import.meta.url));
+---
+
+<section class="wechat-contact" data-testid="wechat-contact">
+  <h2>{t(locale, 'contact.wechatTitle')}</h2>
+  <p class="wechat-contact__row">
+    {t(locale, 'footer.wechat')}: <strong>{CONTACT_WECHAT}</strong>
+    <button
+      type="button"
+      class="wechat-contact__copy"
+      data-testid="copy-wechat"
+      data-copy={CONTACT_WECHAT}
+      data-copied-label={t(locale, 'destinations.copied')}
+    >{t(locale, 'contact.copyWechat')}</button>
+  </p>
+  <p class="wechat-contact__hint">{t(locale, 'contact.wechatHint')}</p>
+  {hasQr && (
+    <img
+      class="wechat-contact__qr"
+      src={WECHAT_QR_PATH}
+      alt={t(locale, 'contact.wechatQrAlt')}
+      width="592"
+      height="794"
+      loading="lazy"
+    />
+  )}
+</section>
+
+<script>
+  document.addEventListener('click', async (e) => {
+    const btn = (e.target as HTMLElement).closest<HTMLButtonElement>('.wechat-contact__copy');
+    if (!btn || !btn.dataset.copy) return;
+    const text = btn.dataset.copy;
+    try {
+      await navigator.clipboard.writeText(text);
+    } catch {
+      const ta = document.createElement('textarea');
+      ta.value = text;
+      ta.style.position = 'fixed';
+      ta.style.opacity = '0';
+      document.body.appendChild(ta);
+      ta.select();
+      document.execCommand('copy');
+      ta.remove();
+    }
+    const original = btn.textContent;
+    btn.textContent = btn.dataset.copiedLabel ?? original;
+    btn.disabled = true;
+    setTimeout(() => {
+      btn.textContent = original;
+      btn.disabled = false;
+    }, 1600);
+  });
+</script>
+
+<style>
+  .wechat-contact {
+    margin-top: 2.5rem;
+    padding-top: 1.5rem;
+    border-top: 1px solid var(--color-border, #e4e7eb);
+  }
+  .wechat-contact__row {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    flex-wrap: wrap;
+  }
+  .wechat-contact__copy {
+    font: inherit;
+    font-size: 0.78rem;
+    line-height: 1;
+    padding: 0.28rem 0.55rem;
+    border: 1px solid var(--color-border, #d5dad8);
+    border-radius: 999px;
+    background: var(--color-surface, #f6f8f7);
+    color: var(--color-brand-dark, #0a5c4c);
+    cursor: pointer;
+    white-space: nowrap;
+  }
+  .wechat-contact__copy:hover {
+    border-color: var(--color-brand-dark, #0a5c4c);
+  }
+  .wechat-contact__copy:disabled {
+    cursor: default;
+    opacity: 0.85;
+  }
+  .wechat-contact__hint {
+    color: var(--color-muted, #5b6470);
+    font-size: 0.92rem;
+  }
+  .wechat-contact__qr {
+    display: block;
+    margin-top: 0.75rem;
+    width: 220px;
+    height: auto;
+    border: 1px solid var(--color-border, #e4e7eb);
+    border-radius: 8px;
+  }
+</style>

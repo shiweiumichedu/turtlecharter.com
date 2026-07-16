@@ -11,6 +11,21 @@ test('/contact renders the inquiry form, consent, and a mailto fallback action',
   await expect(form).toHaveAttribute('action', 'mailto:contact@turtlecharter.com');
 });
 
+test('/contact shows the WeChat contact with a copy button', async ({ page, context }) => {
+  await page.goto('/contact');
+  const wechat = page.locator('[data-testid="wechat-contact"]');
+  await expect(wechat).toContainText('微信');
+  await expect(wechat).toContainText('turtlecharter');
+  await context.grantPermissions(['clipboard-read', 'clipboard-write']);
+  await wechat.locator('[data-testid="copy-wechat"]').click();
+  expect(await page.evaluate(() => navigator.clipboard.readText())).toBe('turtlecharter');
+  // The friend-add QR image loads.
+  const qr = wechat.locator('img.wechat-contact__qr');
+  await qr.scrollIntoViewIfNeeded();
+  await expect(qr).toBeVisible();
+  expect(await qr.evaluate((el: HTMLImageElement) => el.naturalWidth)).toBeGreaterThan(0);
+});
+
 test('/en/contact renders the form in English', async ({ page }) => {
   await page.goto('/en/contact');
   await expect(page.locator('html')).toHaveAttribute('lang', 'en');
