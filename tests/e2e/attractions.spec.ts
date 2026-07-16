@@ -49,12 +49,13 @@ test('an unmatched highlight falls back to a text tile', async ({ page }) => {
 test('itinerary renders day rows with place photos', async ({ page }) => {
   await page.goto('/routes/kunming-dali-lijiang-lugu-lake');
   const days = page.locator('.day-list .day');
-  await expect(days).toHaveCount(6); // six-day loop
+  await expect(days).toHaveCount(7); // seven-day loop
   await expect(page.locator('.day-list')).toContainText('第 1 天');
-  // Five of six days reference a place → five loaded images (day 6 「返程」 has none).
+  await expect(page.locator('.day-list')).toContainText('玉龙雪山');
+  // Six of seven days reference a place → six loaded images (day 7 「返程」 has none).
   const dayImgs = page.locator('.day-list img.day__img');
-  await expect(dayImgs).toHaveCount(5);
-  for (let i = 0; i < 5; i++) await assertLoaded(dayImgs.nth(i));
+  await expect(dayImgs).toHaveCount(6);
+  for (let i = 0; i < 6; i++) await assertLoaded(dayImgs.nth(i));
 });
 
 test('/en itinerary uses English day labels', async ({ page }) => {

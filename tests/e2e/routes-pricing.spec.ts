@@ -46,7 +46,7 @@ test('/en/routes/kunming-dali-lijiang-lugu-lake renders English mode label and n
   const pricing = page.locator('[data-testid="pricing-table"]');
   await expect(pricing).toContainText('Package price');
   await expect(pricing).toContainText('¥4,800');
-  await expect(pricing).toContainText("excl. tickets"); // English price note
+  await expect(pricing).toContainText("excl. meals"); // English price note
 });
 
 // ---- Homepage featured routes ----
