@@ -19,45 +19,59 @@ credit: Photo via Unsplash
 # stretch the bounds. Dukezong Old Town stands in for its own landmarks (Guishan
 # hill, the giant prayer wheel, Moonlight Square). Still-farther minor sights
 # (Baima Snow Mountain, Blue Moon Valley, Shika Snow Mountain) are left off.
+# `rank` is the 排名 from youtube/shangrila-digest.md's heat table (pin
+# number). The table's row 9 groups 白马雪山/白水台/巴拉格宗 — 白水台 keeps 9
+# and 巴拉格宗 takes 11 (past the last row) so no two pins share a number.
+# Gap: 10 蓝月山谷/石卡雪山 isn't pinned.
 spots:
   - lat: 27.8225
     lng: 99.7080
+    rank: 1
     name_zh: 独克宗古城
     name_en: Dukezong Old Town
   - lat: 28.4386
     lng: 98.8480
+    rank: 2
     name_zh: 梅里雪山·飞来寺
     name_en: Meili Snow Mountain (Feilaisi)
   - lat: 27.8760
     lng: 99.7015
+    rank: 3
     name_zh: 松赞林寺
     name_en: Songzanlin Monastery
   - lat: 27.9050
     lng: 99.6350
+    rank: 4
     name_zh: 纳帕海·伊拉草原
     name_en: Napahai & Yila Grassland
   - lat: 27.8930
     lng: 99.9560
+    rank: 5
     name_zh: 普达措国家公园
     name_en: Pudacuo National Park
   - lat: 27.2260
     lng: 100.1130
+    rank: 6
     name_zh: 虎跳峡
     name_en: Tiger Leaping Gorge
   - lat: 28.3760
     lng: 98.8340
+    rank: 7
     name_zh: 雨崩村
     name_en: Yubeng Village
   - lat: 27.3450
     lng: 100.1030
+    rank: 8
     name_zh: 哈巴雪山
     name_en: Haba Snow Mountain
   - lat: 27.5480
     lng: 100.0180
+    rank: 9
     name_zh: 白水台
     name_en: Baishuitai Terraces
   - lat: 28.0430
     lng: 99.4030
+    rank: 11
     name_zh: 巴拉格宗
     name_en: Balagezong Grand Canyon
 order: 4

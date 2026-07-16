@@ -11,38 +11,50 @@ alt_en: Morning at Lugu Lake with a traditional dugout canoe by the willow-lined
 blurb_zh: 横跨滇川的高原湖泊，湖水清澈湛蓝，是摩梭人"女儿国"的故乡；可乘猪槽船游湖、环湖骑行。
 blurb_en: A pristine highland lake straddling Yunnan and Sichuan, home to the matrilineal Mosuo people. Glide across it in a dugout canoe or cycle the shoreline.
 credit: Sherry Zhang / CC BY 2.0 · Wikimedia Commons
+# `rank` is the 排名 from youtube/luguhu-digest.md's heat table (pin number).
+# Gaps: 2 环湖码头 (scattered around the lake), 7 水性杨花 (seasonal, on the
+# water), 9–12 minor/non-pinnable. 草海 and 里务比岛 have no rank of their own
+# in the table, so they take the numbers after its last row (13, 14).
 spots:
-  - lat: 27.6875
-    lng: 100.7925
-    name_zh: 里务比岛
-    name_en: Liwubi Island
-  - lat: 27.6550
-    lng: 100.8000
-    name_zh: 王妃岛
-    name_en: Wangfei Island
-  - lat: 27.7270
-    lng: 100.7880
-    name_zh: 里格半岛
-    name_en: Lige Peninsula
-  - lat: 27.6390
-    lng: 100.8065
-    name_zh: 走婚桥
-    name_en: Walking Marriage Bridge
-  - lat: 27.6270
-    lng: 100.8070
-    name_zh: 草海
-    name_en: Caohai Wetland
-  - lat: 27.7050
-    lng: 100.7530
-    name_zh: 女神湾
-    name_en: Goddess Bay
-  - lat: 27.6900
-    lng: 100.7820
-    name_zh: 大落水村
-    name_en: Daluoshui Village
   - lat: 27.7120
     lng: 100.7480
+    rank: 1
     name_zh: 格姆女神山
     name_en: Gemu Goddess Mountain
+  - lat: 27.7270
+    lng: 100.7880
+    rank: 3
+    name_zh: 里格半岛
+    name_en: Lige Peninsula
+  - lat: 27.7050
+    lng: 100.7530
+    rank: 4
+    name_zh: 女神湾
+    name_en: Goddess Bay
+  - lat: 27.6390
+    lng: 100.8065
+    rank: 5
+    name_zh: 走婚桥
+    name_en: Walking Marriage Bridge
+  - lat: 27.6900
+    lng: 100.7820
+    rank: 6
+    name_zh: 大落水村
+    name_en: Daluoshui Village
+  - lat: 27.6550
+    lng: 100.8000
+    rank: 8
+    name_zh: 王妃岛
+    name_en: Wangfei Island
+  - lat: 27.6270
+    lng: 100.8070
+    rank: 13
+    name_zh: 草海
+    name_en: Caohai Wetland
+  - lat: 27.6875
+    lng: 100.7925
+    rank: 14
+    name_zh: 里务比岛
+    name_en: Liwubi Island
 order: 6
 ---

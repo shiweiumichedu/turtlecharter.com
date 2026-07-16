@@ -1,10 +1,12 @@
 ---
 // Embedded satellite map with numbered pins for a destination's sightseeing
-// spots, plus a side legend mapping each number to the spot's name.
+// spots, plus a side legend mapping each number to the spot's name. Pin
+// numbers come from the caller (digest 排名), so they may have gaps.
 // Uses Leaflet + Esri "World Imagery" tiles (free, no API key).
 export interface MapSpot {
   lat: number;
   lng: number;
+  num: number;
   label: string;
 }
 interface Props {
@@ -23,9 +25,9 @@ const { spots, height = '440px' } = Astro.props;
   >
   </div>
   <ol class="spot-map-legend" data-testid="spot-map-legend">
-    {spots.map((s, i) => (
+    {spots.map((s) => (
       <li>
-        <span class="spot-map-legend__num">{i + 1}</span>
+        <span class="spot-map-legend__num">{s.num}</span>
         <span class="spot-map-legend__name">{s.label}</span>
       </li>
     ))}
@@ -37,9 +39,8 @@ const { spots, height = '440px' } = Astro.props;
   import 'leaflet/dist/leaflet.css';
 
   document.querySelectorAll<HTMLElement>('.spot-map').forEach((el) => {
-    const spots: { lat: number; lng: number; label: string }[] = JSON.parse(
-      el.dataset.spots || '[]',
-    );
+    const spots: { lat: number; lng: number; num: number; label: string }[] =
+      JSON.parse(el.dataset.spots || '[]');
     if (spots.length === 0) return;
 
     const map = L.map(el, { scrollWheelZoom: false });
@@ -54,11 +55,11 @@ const { spots, height = '440px' } = Astro.props;
     ).addTo(map);
 
     const points: [number, number][] = [];
-    spots.forEach((s, i) => {
+    spots.forEach((s) => {
       L.marker([s.lat, s.lng], {
         icon: L.divIcon({
           className: 'spot-map__marker-icon',
-          html: `<span class="spot-map__marker">${i + 1}</span>`,
+          html: `<span class="spot-map__marker">${s.num}</span>`,
           iconSize: [24, 24],
           iconAnchor: [12, 12],
         }),

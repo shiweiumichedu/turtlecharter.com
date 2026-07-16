@@ -21,41 +21,55 @@ credit: Photo by Marc-Olivier Jodoin via Unsplash
 # N) is the one far pin kept — famous and a classic charter run. Baoshan Stone
 # City (~100 km), Laojun Mtn (~110 km) and Wenhai are left off to keep the map
 # tight; Lugu Lake is its own destination on this site, so it is NOT pinned here.
+# `rank` is the 排名 from youtube/lijiang-digest.md's heat table (pin number).
+# Gaps are ranked sights inside already-pinned areas (5 四方街, 9 狮子山,
+# 10 大石桥, 17 大水车 in the old town; 7 冰川公园, 8 云杉坪, 15 牦牛坪 on
+# the snow mountain; 16 白沙锦绣 in Baisha) or listed elsewhere (13 泸沽湖 is
+# its own destination).
 spots:
   - lat: 27.1017
     lng: 100.1750
+    rank: 1
     name_zh: 玉龙雪山
     name_en: Jade Dragon Snow Mountain
   - lat: 26.8720
     lng: 100.2260
+    rank: 2
     name_zh: 丽江古城
     name_en: Lijiang Old Town
   - lat: 26.9700
     lng: 100.2190
+    rank: 3
     name_zh: 白沙古镇
     name_en: Baisha Old Town
   - lat: 27.0980
     lng: 100.2000
+    rank: 4
     name_zh: 蓝月谷
     name_en: Blue Moon Valley
   - lat: 26.9210
     lng: 100.2010
+    rank: 6
     name_zh: 束河古镇
     name_en: Shuhe Old Town
   - lat: 26.8940
     lng: 100.1350
+    rank: 11
     name_zh: 拉市海
     name_en: Lashihai Wetland
   - lat: 27.0100
     lng: 100.1930
+    rank: 12
     name_zh: 玉湖村
     name_en: Yuhu Village
   - lat: 27.1830
     lng: 100.1180
+    rank: 14
     name_zh: 虎跳峡
     name_en: Tiger Leaping Gorge
   - lat: 26.8850
     lng: 100.2360
+    rank: 18
     name_zh: 黑龙潭
     name_en: Black Dragon Pool
 order: 3

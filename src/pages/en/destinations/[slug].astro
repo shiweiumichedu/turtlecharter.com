@@ -18,11 +18,14 @@ const name = localizedField(destination, 'name', locale);
 const blurb = localizedField(destination, 'blurb', locale);
 const alt = localizedField(destination, 'alt', locale) || name;
 const email = destination.email;
-const spots = (destination.spots ?? []).map((s: any) => ({
-  lat: s.lat,
-  lng: s.lng,
-  label: localizedField(s, 'name', locale),
-}));
+const spots = (destination.spots ?? [])
+  .map((s: any, i: number) => ({
+    lat: s.lat,
+    lng: s.lng,
+    num: s.rank ?? i + 1,
+    label: localizedField(s, 'name', locale),
+  }))
+  .sort((a: any, b: any) => a.num - b.num);
 ---
 
 <BaseLayout title={name}>

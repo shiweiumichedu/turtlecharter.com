@@ -20,45 +20,58 @@ credit: Evan Guerra / CC BY-SA 2.0 · Wikimedia Commons
 # Garden ~27 km SE. Damenglong (far south) and the Mengla-town Dai park are left
 # off as too remote / weakly mentioned. The Gaozhuang complex (night market, Great
 # Golden Pagoda, ethnic museum) is represented by a single pin to avoid overlap.
+# `rank` is the 排名 from youtube/banna-digest.md's heat table (pin number).
+# Gaps: 9 白象沙滩 (folded into the riverfront), 11 曼掌古寨, 12 民族博物馆,
+# 14 班罗景区 aren't pinned.
 spots:
   - lat: 22.0177
     lng: 100.7996
+    rank: 1
     name_zh: 告庄西双景·星光夜市
     name_en: Gaozhuang Xishuangjing & Starlight Night Market
   - lat: 22.1755
     lng: 100.8690
+    rank: 2
     name_zh: 野象谷
     name_en: Wild Elephant Valley
   - lat: 21.9180
     lng: 100.5960
+    rank: 3
     name_zh: 勐海古茶山
     name_en: Menghai Ancient Tea Mountains
   - lat: 22.0000
     lng: 100.7915
+    rank: 4
     name_zh: 景洪港·澜沧江游船
     name_en: Jinghong Port (Lancang River Cruise)
   - lat: 22.0460
     lng: 100.8680
+    rank: 5
     name_zh: 原始森林公园
     name_en: Primeval Forest Park
   - lat: 21.9710
     lng: 100.7950
+    rank: 6
     name_zh: 勐泐大佛寺
     name_en: Menglé Grand Buddha Temple
   - lat: 21.9765
     lng: 100.7995
+    rank: 7
     name_zh: 曼听公园
     name_en: Manting Park
   - lat: 22.0050
     lng: 100.7760
+    rank: 8
     name_zh: 热带花卉园
     name_en: Tropical Flower Garden
   - lat: 21.9130
     lng: 101.2690
+    rank: 10
     name_zh: 中科院热带植物园（勐仑）
     name_en: Menglun Tropical Botanical Garden
   - lat: 21.8935
     lng: 100.9750
+    rank: 13
     name_zh: 橄榄坝傣族园
     name_en: Ganlanba Dai Ethnic Garden
 order: 5
