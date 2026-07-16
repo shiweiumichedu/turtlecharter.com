@@ -6,6 +6,7 @@ import { localizedField } from '../../../content/queries';
 import { currentLocale, localizedUrl } from '../../../i18n/utils';
 import { t } from '../../../i18n/strings';
 import { buildPrefilledMailto } from '../../../lib/inquiry';
+import CopyInquiry from '../../../components/CopyInquiry.astro';
 
 export async function getStaticPaths() {
   const destinations = await getCollection('destinations');
@@ -19,6 +20,8 @@ const name = localizedField(destination, 'name', locale);
 const blurb = localizedField(destination, 'blurb', locale);
 const alt = localizedField(destination, 'alt', locale) || name;
 const email = destination.email;
+const emailSubject = t(locale, 'destinations.emailSubject').replace('{name}', name);
+const emailBody = t(locale, 'destinations.emailBody').replace('{name}', name);
 const spots = (destination.spots ?? [])
   .map((s: any, i: number) => ({
     lat: s.lat,
@@ -47,13 +50,8 @@ const spots = (destination.spots ?? [])
     {email && (
       <p class="destination-detail__email">
         {t(locale, 'destinations.emailInvite')}
-        <a
-          href={buildPrefilledMailto(
-            email,
-            t(locale, 'destinations.emailSubject').replace('{name}', name),
-            t(locale, 'destinations.emailBody').replace('{name}', name),
-          )}
-        >{email}</a>
+        <a href={buildPrefilledMailto(email, emailSubject, emailBody)}>{email}</a>
+        <CopyInquiry email={email} subject={emailSubject} body={emailBody} locale={locale} />
       </p>
     )}
   </article>

@@ -4,6 +4,7 @@ import { t } from '../i18n/strings';
 import { localizedUrl } from '../i18n/utils';
 import type { Locale } from '../i18n/utils';
 import { buildPrefilledMailto } from '../lib/inquiry';
+import CopyInquiry from './CopyInquiry.astro';
 
 interface Props {
   destination: Record<string, any>;
@@ -20,13 +21,9 @@ const email = destination.email;
 const hasSpots = (destination.spots?.length ?? 0) > 0;
 const mapHref = hasSpots ? localizedUrl(`/destinations/${destination.slug}`, locale) : destination.mapUrl;
 // Pre-fill the inquiry draft so travelers start from a template, not a blank email.
-const emailHref = email
-  ? buildPrefilledMailto(
-      email,
-      t(locale, 'destinations.emailSubject').replace('{name}', name),
-      t(locale, 'destinations.emailBody').replace('{name}', name),
-    )
-  : undefined;
+const emailSubject = t(locale, 'destinations.emailSubject').replace('{name}', name);
+const emailBody = t(locale, 'destinations.emailBody').replace('{name}', name);
+const emailHref = email ? buildPrefilledMailto(email, emailSubject, emailBody) : undefined;
 ---
 
 <article class="card media-card destination-card" data-testid="destination-card">
@@ -49,6 +46,7 @@ const emailHref = email
       <p class="destination-email" data-testid="destination-email">
         <span class="destination-email__label">{t(locale, 'destinations.emailInvite')}</span>
         <a href={emailHref}>{email}</a>
+        <CopyInquiry email={email} subject={emailSubject} body={emailBody} locale={locale} />
       </p>
     )}
   </div>
