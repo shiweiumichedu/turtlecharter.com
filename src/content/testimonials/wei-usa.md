@@ -1,6 +1,6 @@
 ---
-author_zh: Jane（英国）
-author_en: Jane (UK)
+author_zh: Wei（美国）
+author_en: Wei (USA)
 rating: 5
 route: kunming-dali-lijiang-lugu-lake
 driver: lao-li
