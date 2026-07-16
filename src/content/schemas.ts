@@ -93,7 +93,21 @@ export const destinationSchema = z.object({
   ...bilingual('blurb', { required: false }),
   credit: z.string().optional(),
   email: z.string().email().optional(), // per-destination inquiry alias; shown as a mailto on the card
-  mapUrl: z.string().url().optional(), // Google Maps satellite link to the region's sightseeing spots
+  mapUrl: z.string().url().optional(), // Google Maps satellite link (fallback when no `spots`)
+  // Sightseeing spots pinned on the destination's embedded satellite map.
+  // `rank` is the spot's 排名 from the destination's youtube/*-digest.md heat
+  // table; it becomes the pin number (gaps are expected where a ranked sight
+  // isn't pinned). Spots without a rank fall back to their list position.
+  spots: z
+    .array(
+      z.object({
+        lat: z.number(),
+        lng: z.number(),
+        rank: z.number().int().positive().optional(),
+        ...bilingual('name'),
+      }),
+    )
+    .default([]),
   ...listable,
 });
 

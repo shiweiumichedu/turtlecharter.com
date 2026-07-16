@@ -1,6 +1,7 @@
 ---
 import { localizedField } from '../content/queries';
 import { t } from '../i18n/strings';
+import { localizedUrl } from '../i18n/utils';
 import type { Locale } from '../i18n/utils';
 
 interface Props {
@@ -13,13 +14,22 @@ const name = localizedField(destination, 'name', locale);
 const blurb = localizedField(destination, 'blurb', locale);
 const alt = localizedField(destination, 'alt', locale) || name;
 const email = destination.email;
-const mapUrl = destination.mapUrl;
+// With pinned spots we link to the on-site map page; otherwise fall back to the
+// external Google Maps satellite link.
+const hasSpots = (destination.spots?.length ?? 0) > 0;
+const mapHref = hasSpots ? localizedUrl(`/destinations/${destination.slug}`, locale) : destination.mapUrl;
 ---
 
 <article class="card media-card destination-card" data-testid="destination-card">
   <img class="media-card__img" src={destination.image} alt={alt} loading="lazy" decoding="async" />
-  {mapUrl && (
-    <a class="destination-map" data-testid="destination-map" href={mapUrl} target="_blank" rel="noopener">
+  {mapHref && (
+    <a
+      class="destination-map"
+      data-testid="destination-map"
+      href={mapHref}
+      target={hasSpots ? undefined : '_blank'}
+      rel={hasSpots ? undefined : 'noopener'}
+    >
       {t(locale, 'destinations.mapLink')}
     </a>
   )}

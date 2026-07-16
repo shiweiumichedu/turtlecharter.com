@@ -26,6 +26,22 @@ test('/en/destinations renders English names and lang=en', async ({ page }) => {
   await expect(page.locator('body')).toContainText('Kunming');
 });
 
+test('destination detail page renders the sightseeing map with numbered pins and a legend', async ({ page }) => {
+  await page.goto('/destinations/lugu-lake');
+  await expect(page.locator('[data-testid="spot-map"]')).toHaveCount(1);
+  // Numbered markers render client-side from the spot data (no external tiles needed).
+  await expect(page.locator('.spot-map__marker')).toHaveCount(8);
+  // Pin numbers are the digest 排名 ranks, so they can have gaps.
+  await expect(page.locator('.spot-map__marker', { hasText: /^1$/ })).toHaveCount(1);
+  // The legend maps each rank to the spot's localized name.
+  const legendItems = page.locator('[data-testid="spot-map-legend"] li');
+  await expect(legendItems).toHaveCount(8);
+  await expect(legendItems.filter({ hasText: '走婚桥' })).toHaveText(/5\s*走婚桥/);
+  await expect(legendItems.filter({ hasText: '里格半岛' })).toHaveText(/3\s*里格半岛/);
+  // A distance scale renders so viewers can estimate distances.
+  await expect(page.locator('.spot-map .leaflet-control-scale-line')).toHaveText(/\d+\s*(km|m)/);
+});
+
 // ---- Covers wired into route surfaces ----
 test('route cards show a cover image', async ({ page }) => {
   await page.goto('/routes');
