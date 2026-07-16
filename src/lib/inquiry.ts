@@ -22,6 +22,15 @@ export function buildInquiryMailto({ to, subject, fields }: InquiryMailtoOptions
     .filter((field) => field.value.trim() !== '')
     .map((field) => `${field.label}: ${field.value}`)
     .join('\n');
+  return buildPrefilledMailto(to, subject, body);
+}
+
+/**
+ * Compose a `mailto:` URL from free-text subject and body (both percent-encoded).
+ * Used to pre-fill the per-destination inquiry links so travelers start from a
+ * template instead of a blank draft.
+ */
+export function buildPrefilledMailto(to: string, subject: string, body: string): string {
   const query = `subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
   return `mailto:${to}?${query}`;
 }

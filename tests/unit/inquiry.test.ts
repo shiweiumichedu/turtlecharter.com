@@ -1,5 +1,5 @@
 import { describe, it, expect } from 'vitest';
-import { buildInquiryMailto } from '../../src/lib/inquiry';
+import { buildInquiryMailto, buildPrefilledMailto } from '../../src/lib/inquiry';
 
 const to = 'contact@turtlecharter.com';
 
@@ -58,5 +58,15 @@ describe('buildInquiryMailto', () => {
   it('produces an empty body when no fields have values', () => {
     const url = buildInquiryMailto({ to, subject: 's', fields: [{ label: 'Name', value: '' }] });
     expect(parse(url).body).toBe('');
+  });
+});
+
+describe('buildPrefilledMailto', () => {
+  it('builds a mailto with free-text subject and body, percent-encoded', () => {
+    const url = buildPrefilledMailto(to, '咨询昆明包车行程', '您好！\n\n出行日期：\n人数：\n');
+    expect(url).not.toMatch(/[ \n]/);
+    const { subject, body } = parse(url);
+    expect(subject).toBe('咨询昆明包车行程');
+    expect(body).toBe('您好！\n\n出行日期：\n人数：\n');
   });
 });
