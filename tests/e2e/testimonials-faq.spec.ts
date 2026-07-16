@@ -6,7 +6,7 @@ test('/testimonials lists cards with quote, rating, and route+driver links', asy
   const cards = page.locator('[data-testid="testimonial-card"]');
   await expect(cards).toHaveCount(1);
   const body = page.locator('body');
-  await expect(body).toContainText('Jane（英国）'); // zh author
+  await expect(body).toContainText('Wei（美国）'); // zh author
   await expect(body).toContainText('张师傅全程细心'); // zh quote
   await expect(cards.first().locator('.stars')).toContainText('★★★★★');
   await expect(page.locator('a[href="/routes/kunming-dali-lijiang-lugu-lake"]')).toHaveCount(1);
@@ -17,7 +17,7 @@ test('/en/testimonials renders English author/quote and /en/ links', async ({ pa
   await page.goto('/en/testimonials');
   await expect(page.locator('html')).toHaveAttribute('lang', 'en');
   const body = page.locator('body');
-  await expect(body).toContainText('Jane (UK)');
+  await expect(body).toContainText('Wei (USA)');
   await expect(body).toContainText('Master Zhang was attentive');
   await expect(page.locator('a[href="/en/routes/kunming-dali-lijiang-lugu-lake"]')).toHaveCount(1);
   await expect(page.locator('a[href="/en/drivers/lao-li"]')).toHaveCount(1);
