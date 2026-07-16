@@ -3,6 +3,7 @@ import { localizedField } from '../content/queries';
 import { t } from '../i18n/strings';
 import { localizedUrl } from '../i18n/utils';
 import type { Locale } from '../i18n/utils';
+import { buildPrefilledMailto } from '../lib/inquiry';
 
 interface Props {
   destination: Record<string, any>;
@@ -18,6 +19,14 @@ const email = destination.email;
 // external Google Maps satellite link.
 const hasSpots = (destination.spots?.length ?? 0) > 0;
 const mapHref = hasSpots ? localizedUrl(`/destinations/${destination.slug}`, locale) : destination.mapUrl;
+// Pre-fill the inquiry draft so travelers start from a template, not a blank email.
+const emailHref = email
+  ? buildPrefilledMailto(
+      email,
+      t(locale, 'destinations.emailSubject').replace('{name}', name),
+      t(locale, 'destinations.emailBody').replace('{name}', name),
+    )
+  : undefined;
 ---
 
 <article class="card media-card destination-card" data-testid="destination-card">
@@ -39,7 +48,7 @@ const mapHref = hasSpots ? localizedUrl(`/destinations/${destination.slug}`, loc
     {email && (
       <p class="destination-email" data-testid="destination-email">
         <span class="destination-email__label">{t(locale, 'destinations.emailInvite')}</span>
-        <a href={`mailto:${email}`}>{email}</a>
+        <a href={emailHref}>{email}</a>
       </p>
     )}
   </div>

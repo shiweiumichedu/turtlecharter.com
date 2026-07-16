@@ -7,6 +7,8 @@
   "destinations.title": "Destinations",
   "destinations.intro": "From spring-like Kunming to the Tibetan highlands of Shangri-La — Yunnan's classic stops at a glance.",
   "destinations.emailInvite": "Email us for free travel info:",
+  "destinations.emailSubject": "Inquiry: {name} private car tour (free itinerary info)",
+  "destinations.emailBody": "Hi! I found {name} on turtlecharter.com and would like the free itinerary info for a private car tour.\n\nTravel dates:\nGroup size:\nSights or experiences I'm interested in:\nOther questions:\n\nThank you!",
   "destinations.mapLink": "🛰 View sights on satellite map",
   "destinations.mapHeading": "Sightseeing map",
   "destinations.mapIntro": "Major local sights pinned on a satellite map — tap a marker for its name.",

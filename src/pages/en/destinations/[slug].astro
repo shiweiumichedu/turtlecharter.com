@@ -5,6 +5,7 @@ import SpotMap from '../../../components/SpotMap.astro';
 import { localizedField } from '../../../content/queries';
 import { currentLocale, localizedUrl } from '../../../i18n/utils';
 import { t } from '../../../i18n/strings';
+import { buildPrefilledMailto } from '../../../lib/inquiry';
 
 export async function getStaticPaths() {
   const destinations = await getCollection('destinations');
@@ -46,7 +47,13 @@ const spots = (destination.spots ?? [])
     {email && (
       <p class="destination-detail__email">
         {t(locale, 'destinations.emailInvite')}
-        <a href={`mailto:${email}`}>{email}</a>
+        <a
+          href={buildPrefilledMailto(
+            email,
+            t(locale, 'destinations.emailSubject').replace('{name}', name),
+            t(locale, 'destinations.emailBody').replace('{name}', name),
+          )}
+        >{email}</a>
       </p>
     )}
   </article>
