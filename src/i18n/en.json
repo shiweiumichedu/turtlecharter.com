@@ -8,6 +8,7 @@
   "destinations.intro": "From spring-like Kunming to the Tibetan highlands of Shangri-La — Yunnan's classic stops at a glance.",
   "destinations.emailInvite": "Email us for free travel info:",
   "destinations.emailSubject": "Inquiry: {name} private car tour (free itinerary info)",
+  "destinations.emailHint": "If no email window opens, use \"Copy address\" and \"Copy inquiry template\" (复制邮箱 / 复制咨询模板) to paste into your webmail",
   "destinations.copyEmail": "Copy address",
   "destinations.copyTemplate": "Copy inquiry template",
   "destinations.copied": "Copied ✓",

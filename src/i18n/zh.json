@@ -8,6 +8,7 @@
   "destinations.intro": "从春城昆明到雪域香格里拉，云南经典目的地一览。",
   "destinations.emailInvite": "邮件咨询，免费获取行程资料：",
   "destinations.emailSubject": "咨询{name}包车行程（免费行程资料）",
+  "destinations.emailHint": "若点击后没有弹出邮件窗口，可点「复制邮箱」和「复制咨询模板」，自行粘贴到网页邮箱发送",
   "destinations.copyEmail": "复制邮箱",
   "destinations.copyTemplate": "复制咨询模板",
   "destinations.copied": "已复制 ✓",
