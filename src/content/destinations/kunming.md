@@ -27,8 +27,8 @@ spots:
     rank: 2
     name_zh: 翠湖公园
     name_en: Green Lake Park
-  - lat: 24.9647
-    lng: 102.6353
+  - lat: 24.9585
+    lng: 102.6415
     rank: 3
     name_zh: 西山·龙门
     name_en: Western Hills & Dragon Gate
@@ -37,13 +37,13 @@ spots:
     rank: 4
     name_zh: 昆明老街
     name_en: Kunming Old Street
-  - lat: 24.9370
-    lng: 102.7620
+  - lat: 24.9595
+    lng: 102.7555
     rank: 5
     name_zh: 官渡古镇
     name_en: Guandu Ancient Town
-  - lat: 24.9758
-    lng: 102.7930
+  - lat: 24.9522
+    lng: 102.7522
     rank: 6
     name_zh: 云南省博物馆
     name_en: Yunnan Provincial Museum
@@ -72,8 +72,8 @@ spots:
     rank: 13
     name_zh: 云南民族村
     name_en: Yunnan Nationalities Village
-  - lat: 24.8930
-    lng: 102.7640
+  - lat: 24.8950
+    lng: 102.7740
     rank: 14
     name_zh: 斗南花市
     name_en: Dounan Flower Market

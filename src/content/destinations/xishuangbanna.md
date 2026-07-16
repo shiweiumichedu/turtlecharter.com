@@ -24,8 +24,8 @@ credit: Evan Guerra / CC BY-SA 2.0 · Wikimedia Commons
 # Gaps: 9 白象沙滩 (folded into the riverfront), 11 曼掌古寨, 12 民族博物馆,
 # 14 班罗景区 aren't pinned.
 spots:
-  - lat: 22.0177
-    lng: 100.7996
+  - lat: 22.0110
+    lng: 100.8175
     rank: 1
     name_zh: 告庄西双景·星光夜市
     name_en: Gaozhuang Xishuangjing & Starlight Night Market
@@ -39,23 +39,23 @@ spots:
     rank: 3
     name_zh: 勐海古茶山
     name_en: Menghai Ancient Tea Mountains
-  - lat: 22.0000
-    lng: 100.7915
+  - lat: 22.0115
+    lng: 100.8090
     rank: 4
     name_zh: 景洪港·澜沧江游船
     name_en: Jinghong Port (Lancang River Cruise)
-  - lat: 22.0460
-    lng: 100.8680
+  - lat: 22.0306
+    lng: 100.8730
     rank: 5
     name_zh: 原始森林公园
     name_en: Primeval Forest Park
-  - lat: 21.9710
-    lng: 100.7950
+  - lat: 21.9631
+    lng: 100.8070
     rank: 6
     name_zh: 勐泐大佛寺
     name_en: Menglé Grand Buddha Temple
-  - lat: 21.9765
-    lng: 100.7995
+  - lat: 21.9925
+    lng: 100.8060
     rank: 7
     name_zh: 曼听公园
     name_en: Manting Park
@@ -64,13 +64,13 @@ spots:
     rank: 8
     name_zh: 热带花卉园
     name_en: Tropical Flower Garden
-  - lat: 21.9130
-    lng: 101.2690
+  - lat: 21.9174
+    lng: 101.2728
     rank: 10
     name_zh: 中科院热带植物园（勐仑）
     name_en: Menglun Tropical Botanical Garden
-  - lat: 21.8935
-    lng: 100.9750
+  - lat: 21.8515
+    lng: 100.9446
     rank: 13
     name_zh: 橄榄坝傣族园
     name_en: Ganlanba Dai Ethnic Garden

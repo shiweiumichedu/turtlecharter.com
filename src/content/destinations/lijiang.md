@@ -42,8 +42,8 @@ spots:
     rank: 3
     name_zh: 白沙古镇
     name_en: Baisha Old Town
-  - lat: 27.0980
-    lng: 100.2000
+  - lat: 27.1285
+    lng: 100.2415
     rank: 4
     name_zh: 蓝月谷
     name_en: Blue Moon Valley
@@ -57,13 +57,13 @@ spots:
     rank: 11
     name_zh: 拉市海
     name_en: Lashihai Wetland
-  - lat: 27.0100
-    lng: 100.1930
+  - lat: 27.0146
+    lng: 100.2126
     rank: 12
     name_zh: 玉湖村
     name_en: Yuhu Village
-  - lat: 27.1830
-    lng: 100.1180
+  - lat: 27.1925
+    lng: 100.1125
     rank: 14
     name_zh: 虎跳峡
     name_en: Tiger Leaping Gorge

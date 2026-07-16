@@ -16,43 +16,43 @@ credit: Sherry Zhang / CC BY 2.0 · Wikimedia Commons
 # water), 9–12 minor/non-pinnable. 草海 and 里务比岛 have no rank of their own
 # in the table, so they take the numbers after its last row (13, 14).
 spots:
-  - lat: 27.7120
-    lng: 100.7480
+  - lat: 27.7555
+    lng: 100.7395
     rank: 1
     name_zh: 格姆女神山
     name_en: Gemu Goddess Mountain
-  - lat: 27.7270
-    lng: 100.7880
+  - lat: 27.7378
+    lng: 100.7653
     rank: 3
     name_zh: 里格半岛
     name_en: Lige Peninsula
-  - lat: 27.7050
-    lng: 100.7530
+  - lat: 27.7039
+    lng: 100.8047
     rank: 4
     name_zh: 女神湾
     name_en: Goddess Bay
-  - lat: 27.6390
-    lng: 100.8065
+  - lat: 27.7131
+    lng: 100.8757
     rank: 5
     name_zh: 走婚桥
     name_en: Walking Marriage Bridge
-  - lat: 27.6900
-    lng: 100.7820
+  - lat: 27.6820
+    lng: 100.7690
     rank: 6
     name_zh: 大落水村
     name_en: Daluoshui Village
-  - lat: 27.6550
-    lng: 100.8000
+  - lat: 27.6977
+    lng: 100.8202
     rank: 8
     name_zh: 王妃岛
     name_en: Wangfei Island
-  - lat: 27.6270
-    lng: 100.8070
+  - lat: 27.7080
+    lng: 100.8560
     rank: 13
     name_zh: 草海
     name_en: Caohai Wetland
   - lat: 27.6875
-    lng: 100.7925
+    lng: 100.7857
     rank: 14
     name_zh: 里务比岛
     name_en: Liwubi Island

@@ -34,8 +34,8 @@ spots:
     rank: 2
     name_zh: 梅里雪山·飞来寺
     name_en: Meili Snow Mountain (Feilaisi)
-  - lat: 27.8760
-    lng: 99.7015
+  - lat: 27.8630
+    lng: 99.7040
     rank: 3
     name_zh: 松赞林寺
     name_en: Songzanlin Monastery
@@ -49,28 +49,28 @@ spots:
     rank: 5
     name_zh: 普达措国家公园
     name_en: Pudacuo National Park
-  - lat: 27.2260
-    lng: 100.1130
+  - lat: 27.1925
+    lng: 100.1125
     rank: 6
     name_zh: 虎跳峡
     name_en: Tiger Leaping Gorge
-  - lat: 28.3760
-    lng: 98.8340
+  - lat: 28.3620
+    lng: 98.7850
     rank: 7
     name_zh: 雨崩村
     name_en: Yubeng Village
-  - lat: 27.3450
-    lng: 100.1030
+  - lat: 27.3219
+    lng: 100.1060
     rank: 8
     name_zh: 哈巴雪山
     name_en: Haba Snow Mountain
-  - lat: 27.5480
-    lng: 100.0180
+  - lat: 27.5021
+    lng: 100.0337
     rank: 9
     name_zh: 白水台
     name_en: Baishuitai Terraces
-  - lat: 28.0430
-    lng: 99.4030
+  - lat: 28.3434
+    lng: 99.4611
     rank: 11
     name_zh: 巴拉格宗
     name_en: Balagezong Grand Canyon

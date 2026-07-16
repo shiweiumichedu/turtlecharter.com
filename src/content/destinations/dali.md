@@ -38,18 +38,18 @@ spots:
     rank: 3
     name_zh: 大理古城
     name_en: Dali Old Town
-  - lat: 25.8570
-    lng: 100.1590
+  - lat: 25.8560
+    lng: 100.1500
     rank: 4
     name_zh: 喜洲古镇
     name_en: Xizhou Old Town
-  - lat: 25.6997
-    lng: 100.1515
+  - lat: 25.7070
+    lng: 100.1425
     rank: 5
     name_zh: 崇圣寺三塔
     name_en: Three Pagodas
-  - lat: 25.9330
-    lng: 100.2020
+  - lat: 25.9135
+    lng: 100.1926
     rank: 6
     name_zh: 双廊古镇
     name_en: Shuanglang Old Town
