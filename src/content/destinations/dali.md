@@ -58,8 +58,8 @@ spots:
     rank: 10
     name_zh: 沙溪古镇
     name_en: Shaxi Ancient Town
-  - lat: 25.9000
-    lng: 100.1630
+  - lat: 25.9093
+    lng: 100.0946
     rank: 11
     name_zh: 蝴蝶泉
     name_en: Butterfly Spring
