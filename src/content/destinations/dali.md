@@ -63,8 +63,8 @@ spots:
     rank: 11
     name_zh: 蝴蝶泉
     name_en: Butterfly Spring
-  - lat: 25.8140
-    lng: 100.2460
+  - lat: 25.8106
+    lng: 100.2219
     rank: 12
     name_zh: 小普陀
     name_en: Xiao Putuo Islet
