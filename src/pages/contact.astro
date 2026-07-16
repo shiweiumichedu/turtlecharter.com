@@ -1,6 +1,7 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
 import InquiryForm from '../components/InquiryForm.astro';
+import WeChatContact from '../components/WeChatContact.astro';
 ---
 
 <BaseLayout title="联系我们" description="联系我们，获取免费定制的云南包车纯玩行程。">
@@ -8,5 +9,6 @@ import InquiryForm from '../components/InquiryForm.astro';
     <h1>联系我们</h1>
     <p>填写下面的表单，我们会尽快回复并为您免费定制行程。</p>
     <InquiryForm />
+    <WeChatContact locale="zh" />
   </section>
 </BaseLayout>
