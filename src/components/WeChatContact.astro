@@ -34,8 +34,8 @@ const hasQr = existsSync(new URL(`../../public${WECHAT_QR_PATH}`, import.meta.ur
       class="wechat-contact__qr"
       src={WECHAT_QR_PATH}
       alt={t(locale, 'contact.wechatQrAlt')}
-      width="180"
-      height="180"
+      width="592"
+      height="794"
       loading="lazy"
     />
   )}
@@ -106,6 +106,8 @@ const hasQr = existsSync(new URL(`../../public${WECHAT_QR_PATH}`, import.meta.ur
   .wechat-contact__qr {
     display: block;
     margin-top: 0.75rem;
+    width: 220px;
+    height: auto;
     border: 1px solid var(--color-border, #e4e7eb);
     border-radius: 8px;
   }

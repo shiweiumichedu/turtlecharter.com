@@ -19,6 +19,11 @@ test('/contact shows the WeChat contact with a copy button', async ({ page, cont
   await context.grantPermissions(['clipboard-read', 'clipboard-write']);
   await wechat.locator('[data-testid="copy-wechat"]').click();
   expect(await page.evaluate(() => navigator.clipboard.readText())).toBe('turtlecharter');
+  // The friend-add QR image loads.
+  const qr = wechat.locator('img.wechat-contact__qr');
+  await qr.scrollIntoViewIfNeeded();
+  await expect(qr).toBeVisible();
+  expect(await qr.evaluate((el: HTMLImageElement) => el.naturalWidth)).toBeGreaterThan(0);
 });
 
 test('/en/contact renders the form in English', async ({ page }) => {
