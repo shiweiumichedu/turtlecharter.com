@@ -45,7 +45,7 @@ const emailHref = email ? buildPrefilledMailto(email, emailSubject, emailBody) :
     {email && (
       <p class="destination-email" data-testid="destination-email">
         <span class="destination-email__label">{t(locale, 'destinations.emailInvite')}</span>
-        <a href={emailHref}>{email}</a>
+        <a href={emailHref} title={t(locale, 'destinations.emailHint')}>{email}</a>
         <CopyInquiry email={email} subject={emailSubject} body={emailBody} locale={locale} />
       </p>
     )}

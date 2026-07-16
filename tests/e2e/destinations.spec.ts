@@ -42,6 +42,13 @@ test('destination detail page renders the sightseeing map with numbered pins and
   await expect(page.locator('.spot-map .leaflet-control-scale-line')).toHaveText(/\d+\s*(km|m)/);
 });
 
+test('email link hints at the copy buttons for visitors without a mail app', async ({ page }) => {
+  await page.goto('/destinations/dali');
+  const link = page.locator('.destination-detail__email a[href^="mailto:"]');
+  await expect(link).toHaveAttribute('title', /复制邮箱/);
+  await expect(link).toHaveAttribute('title', /复制咨询模板/);
+});
+
 test('email inquiry offers copy buttons for visitors without a mail app', async ({ page, context, browserName }) => {
   test.skip(browserName !== 'chromium', 'clipboard permissions are chromium-only in Playwright');
   await context.grantPermissions(['clipboard-read', 'clipboard-write']);
