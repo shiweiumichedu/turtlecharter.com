@@ -28,13 +28,13 @@ test('/en/attractions renders English names and lang=en', async ({ page }) => {
 
 // ---- Highlights as photo tiles on the route detail page ----
 test('route highlights render as photo tiles', async ({ page }) => {
-  await page.goto('/routes/kunming-dali-lijiang-shangri-la');
-  // All four highlights (洱海/玉龙雪山/虎跳峡/普达措) match attractions → four images.
-  const tiles = page.locator('.highlights .highlight__media');
-  await expect(tiles).toHaveCount(4);
+  await page.goto('/routes/kunming-dali-lijiang-lugu-lake');
+  // 洱海/玉龙雪山 match attractions → images; 泸沽湖/格姆女神山 have none → text tiles.
   const imgs = page.locator('.highlights img.highlight__media');
-  await expect(imgs).toHaveCount(4);
-  for (let i = 0; i < 4; i++) await assertLoaded(imgs.nth(i));
+  await expect(imgs).toHaveCount(2);
+  for (let i = 0; i < 2; i++) await assertLoaded(imgs.nth(i));
+  await expect(page.locator('.highlights .highlight__name', { hasText: '泸沽湖' })).toHaveCount(1);
+  await expect(page.locator('.highlights .highlight__name', { hasText: '格姆女神山' })).toHaveCount(1);
 });
 
 test('an unmatched highlight falls back to a text tile', async ({ page }) => {
@@ -46,7 +46,7 @@ test('an unmatched highlight falls back to a text tile', async ({ page }) => {
 
 // ---- Structured day-by-day itinerary with photos ----
 test('itinerary renders day rows with place photos', async ({ page }) => {
-  await page.goto('/routes/kunming-dali-lijiang-shangri-la');
+  await page.goto('/routes/kunming-dali-lijiang-lugu-lake');
   const days = page.locator('.day-list .day');
   await expect(days).toHaveCount(6); // six-day loop
   await expect(page.locator('.day-list')).toContainText('第 1 天');
@@ -57,7 +57,7 @@ test('itinerary renders day rows with place photos', async ({ page }) => {
 });
 
 test('/en itinerary uses English day labels', async ({ page }) => {
-  await page.goto('/en/routes/kunming-dali-lijiang-shangri-la');
+  await page.goto('/en/routes/kunming-dali-lijiang-lugu-lake');
   await expect(page.locator('.day-list')).toContainText('Day 1');
   await expect(page.locator('.day-list')).toContainText('Arrive Kunming');
 });

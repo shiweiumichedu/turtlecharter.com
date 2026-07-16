@@ -2,7 +2,7 @@
 author_zh: Jane（英国）
 author_en: Jane (UK)
 rating: 5
-route: kunming-dali-lijiang-shangri-la
+route: kunming-dali-lijiang-lugu-lake
 driver: lao-li
 date: 2026-04-12
 featured: true

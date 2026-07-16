@@ -16,3 +16,15 @@
   to = "https://turtlecharter.com/:splat"
   status = 301
   force = true
+
+# The classic loop route was reworked from Shangri-La to Lugu Lake (2026-07);
+# keep the old URL working for anyone who bookmarked or indexed it.
+[[redirects]]
+  from = "/routes/kunming-dali-lijiang-shangri-la"
+  to = "/routes/kunming-dali-lijiang-lugu-lake"
+  status = 301
+
+[[redirects]]
+  from = "/en/routes/kunming-dali-lijiang-shangri-la"
+  to = "/en/routes/kunming-dali-lijiang-lugu-lake"
+  status = 301
