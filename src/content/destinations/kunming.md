@@ -14,7 +14,7 @@ credit: Photo via Unsplash
 # Spots reflect the attractions featured across LTV旅行's four Kunming videos
 # (2025-07 to 2025-09). `rank` is the 排名 from youtube/kunming-digest.md's
 # heat table and becomes the pin number — gaps are ranked sights left unpinned
-# (8 云南大学, 11 西南联大, 12 圆通山, 15 轿子雪山, 16 黑龙潭). The Stone
+# (11 西南联大, 12 圆通山, 15 轿子雪山, 16 黑龙潭). The Stone
 # Forest is ~80 km SE, so pinning it widens the map to a regional view.
 spots:
   - lat: 24.9720
@@ -52,6 +52,11 @@ spots:
     rank: 7
     name_zh: 石林
     name_en: Stone Forest
+  - lat: 25.0602
+    lng: 102.7032
+    rank: 8
+    name_zh: 云南大学
+    name_en: Yunnan University
   - lat: 25.0555
     lng: 102.6996
     rank: 9
