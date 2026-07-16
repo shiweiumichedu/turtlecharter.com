@@ -1,6 +1,7 @@
 ---
-// Embedded satellite map with custom labeled pins for a destination's sightseeing
-// spots. Uses Leaflet + Esri "World Imagery" tiles (free, no API key).
+// Embedded satellite map with numbered pins for a destination's sightseeing
+// spots, plus a side legend mapping each number to the spot's name.
+// Uses Leaflet + Esri "World Imagery" tiles (free, no API key).
 export interface MapSpot {
   lat: number;
   lng: number;
@@ -13,12 +14,22 @@ interface Props {
 const { spots, height = '440px' } = Astro.props;
 ---
 
-<div
-  class="spot-map"
-  data-testid="spot-map"
-  style={`height:${height}`}
-  data-spots={JSON.stringify(spots)}
->
+<div class="spot-map-wrap">
+  <div
+    class="spot-map"
+    data-testid="spot-map"
+    style={`height:${height}`}
+    data-spots={JSON.stringify(spots)}
+  >
+  </div>
+  <ol class="spot-map-legend" data-testid="spot-map-legend">
+    {spots.map((s, i) => (
+      <li>
+        <span class="spot-map-legend__num">{i + 1}</span>
+        <span class="spot-map-legend__name">{s.label}</span>
+      </li>
+    ))}
+  </ol>
 </div>
 
 <script>
@@ -43,48 +54,95 @@ const { spots, height = '440px' } = Astro.props;
     ).addTo(map);
 
     const points: [number, number][] = [];
-    for (const s of spots) {
-      L.circleMarker([s.lat, s.lng], {
-        radius: 7,
-        color: '#ffffff',
-        weight: 2,
-        fillColor: '#e8a13a',
-        fillOpacity: 1,
+    spots.forEach((s, i) => {
+      L.marker([s.lat, s.lng], {
+        icon: L.divIcon({
+          className: 'spot-map__marker-icon',
+          html: `<span class="spot-map__marker">${i + 1}</span>`,
+          iconSize: [24, 24],
+          iconAnchor: [12, 12],
+        }),
       })
         .addTo(map)
-        .bindTooltip(s.label, {
-          permanent: true,
-          direction: 'top',
-          className: 'spot-map__label',
-          offset: [0, -6],
-        });
+        .bindTooltip(s.label, { direction: 'top', offset: [0, -12] });
       points.push([s.lat, s.lng]);
-    }
+    });
 
     map.fitBounds(points, { padding: [45, 45], maxZoom: 14 });
   });
 </script>
 
 <style>
+  .spot-map-wrap {
+    display: flex;
+    gap: 1rem;
+    align-items: stretch;
+  }
   .spot-map {
-    width: 100%;
+    flex: 1;
+    min-width: 0;
     border-radius: 12px;
     overflow: hidden;
     border: 1px solid var(--color-border, #e4e7eb);
     background: var(--color-surface, #f6f8f7);
   }
-  :global(.spot-map__label) {
-    background: rgba(20, 20, 20, 0.78);
-    color: #fff;
-    border: none;
-    border-radius: 4px;
-    font-size: 0.78rem;
-    font-weight: 600;
-    padding: 2px 7px;
-    box-shadow: none;
-    white-space: nowrap;
+  .spot-map-legend {
+    flex: 0 0 200px;
+    margin: 0;
+    padding: 0.25rem 0;
+    list-style: none;
+    align-self: center;
   }
-  :global(.spot-map__label::before) {
-    display: none; /* hide the default tooltip arrow */
+  .spot-map-legend li {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.22rem 0;
+    font-size: 0.9rem;
+  }
+  .spot-map-legend__num {
+    flex: 0 0 auto;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 1.35rem;
+    height: 1.35rem;
+    border-radius: 50%;
+    background: #e8a13a;
+    border: 2px solid #ffffff;
+    box-shadow: 0 0 0 1px rgba(0, 0, 0, 0.15);
+    color: #fff;
+    font-size: 0.72rem;
+    font-weight: 700;
+  }
+  @media (max-width: 640px) {
+    .spot-map-wrap {
+      flex-direction: column;
+    }
+    .spot-map-legend {
+      flex: none;
+      align-self: auto;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      column-gap: 0.75rem;
+    }
+  }
+  :global(.spot-map__marker-icon) {
+    background: none;
+    border: none;
+  }
+  :global(.spot-map__marker) {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 24px;
+    height: 24px;
+    border-radius: 50%;
+    background: #e8a13a;
+    border: 2px solid #ffffff;
+    box-shadow: 0 1px 4px rgba(0, 0, 0, 0.45);
+    color: #fff;
+    font-size: 0.78rem;
+    font-weight: 700;
   }
 </style>

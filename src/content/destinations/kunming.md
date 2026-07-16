@@ -14,9 +14,8 @@ credit: Photo via Unsplash
 # Spots reflect the attractions featured across LTV旅行's four Kunming videos
 # (2025-07 to 2025-09), ordered by how often they came up. The Stone Forest is
 # ~80 km SE, so pinning it widens the map to a regional view; Jiaozi Snow
-# Mountain (~130 km) is still left off. The downtown Green Lake cluster (Yunnan
-# Univ., the Army Academy, Yuantong Hill) is represented by Green Lake Park to
-# avoid overlapping pins.
+# Mountain (~130 km) is still left off. Numbered pins allow the tight Green
+# Lake cluster (the Army Academy sits on the lake's west shore) to coexist.
 spots:
   - lat: 24.9720
     lng: 102.6620
@@ -26,6 +25,10 @@ spots:
     lng: 102.7052
     name_zh: 翠湖公园
     name_en: Green Lake Park
+  - lat: 25.0555
+    lng: 102.6996
+    name_zh: 陆军讲武堂
+    name_en: Yunnan Military Academy
   - lat: 24.9647
     lng: 102.6353
     name_zh: 西山·龙门
