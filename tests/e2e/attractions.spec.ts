@@ -10,13 +10,14 @@ async function assertLoaded(img: import('@playwright/test').Locator) {
 test('/attractions lists attraction cards with loaded images and alt text', async ({ page }) => {
   await page.goto('/attractions');
   const cards = page.locator('[data-testid="attraction-card"]');
-  await expect(cards).toHaveCount(5);
+  await expect(cards).toHaveCount(7);
   await expect(page.locator('body')).toContainText('洱海');
   await expect(page.locator('body')).toContainText('虎跳峡');
+  await expect(page.locator('body')).toContainText('格姆女神山');
 
   const imgs = page.locator('[data-testid="attraction-card"] img');
-  await expect(imgs).toHaveCount(5);
-  for (let i = 0; i < 5; i++) await assertLoaded(imgs.nth(i));
+  await expect(imgs).toHaveCount(7);
+  for (let i = 0; i < 7; i++) await assertLoaded(imgs.nth(i));
 });
 
 test('/en/attractions renders English names and lang=en', async ({ page }) => {
@@ -29,12 +30,12 @@ test('/en/attractions renders English names and lang=en', async ({ page }) => {
 // ---- Highlights as photo tiles on the route detail page ----
 test('route highlights render as photo tiles', async ({ page }) => {
   await page.goto('/routes/kunming-dali-lijiang-lugu-lake');
-  // 洱海/玉龙雪山 match attractions → images; 泸沽湖/格姆女神山 have none → text tiles.
+  // All four highlights (洱海/玉龙雪山/泸沽湖/格姆女神山) match attractions → four images.
+  const tiles = page.locator('.highlights .highlight__media');
+  await expect(tiles).toHaveCount(4);
   const imgs = page.locator('.highlights img.highlight__media');
-  await expect(imgs).toHaveCount(2);
-  for (let i = 0; i < 2; i++) await assertLoaded(imgs.nth(i));
-  await expect(page.locator('.highlights .highlight__name', { hasText: '泸沽湖' })).toHaveCount(1);
-  await expect(page.locator('.highlights .highlight__name', { hasText: '格姆女神山' })).toHaveCount(1);
+  await expect(imgs).toHaveCount(4);
+  for (let i = 0; i < 4; i++) await assertLoaded(imgs.nth(i));
 });
 
 test('an unmatched highlight falls back to a text tile', async ({ page }) => {
