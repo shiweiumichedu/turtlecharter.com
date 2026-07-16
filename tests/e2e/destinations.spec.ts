@@ -42,6 +42,21 @@ test('destination detail page renders the sightseeing map with numbered pins and
   await expect(page.locator('.spot-map .leaflet-control-scale-line')).toHaveText(/\d+\s*(km|m)/);
 });
 
+test('email inquiry offers copy buttons for visitors without a mail app', async ({ page, context, browserName }) => {
+  test.skip(browserName !== 'chromium', 'clipboard permissions are chromium-only in Playwright');
+  await context.grantPermissions(['clipboard-read', 'clipboard-write']);
+  await page.goto('/destinations/kunming');
+  const copyEmail = page.locator('[data-testid="copy-email"]').first();
+  const copyTemplate = page.locator('[data-testid="copy-template"]').first();
+  await copyEmail.click();
+  expect(await page.evaluate(() => navigator.clipboard.readText())).toBe('kunming@turtlecharter.com');
+  await expect(copyEmail).toHaveText(/已复制/);
+  await copyTemplate.click();
+  const template = await page.evaluate(() => navigator.clipboard.readText());
+  expect(template).toContain('主题：咨询昆明包车行程');
+  expect(template).toContain('出行日期：');
+});
+
 // ---- Covers wired into route surfaces ----
 test('route cards show a cover image', async ({ page }) => {
   await page.goto('/routes');

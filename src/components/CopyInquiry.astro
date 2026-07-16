@@ -1,0 +1,92 @@
+---
+// Copy-to-clipboard fallback for the inquiry mailto links: computers without a
+// configured mail app do nothing on mailto clicks, so offer "copy address" and
+// "copy inquiry template" chips that webmail users can paste from.
+import { t } from '../i18n/strings';
+import type { Locale } from '../i18n/utils';
+
+interface Props {
+  email: string;
+  subject: string;
+  body: string;
+  locale: Locale;
+}
+
+const { email, subject, body, locale } = Astro.props;
+const template = `${t(locale, 'destinations.subjectLabel')}${subject}\n\n${body}`;
+const copied = t(locale, 'destinations.copied');
+---
+
+<span class="copy-inquiry">
+  <button
+    type="button"
+    class="copy-inquiry__btn"
+    data-testid="copy-email"
+    data-copy={email}
+    data-copied-label={copied}
+  >{t(locale, 'destinations.copyEmail')}</button>
+  <button
+    type="button"
+    class="copy-inquiry__btn"
+    data-testid="copy-template"
+    data-copy={template}
+    data-copied-label={copied}
+  >{t(locale, 'destinations.copyTemplate')}</button>
+</span>
+
+<script>
+  // One delegated listener for every instance on the page.
+  document.addEventListener('click', async (e) => {
+    const btn = (e.target as HTMLElement).closest<HTMLButtonElement>('.copy-inquiry__btn');
+    if (!btn || !btn.dataset.copy) return;
+    const text = btn.dataset.copy;
+    try {
+      await navigator.clipboard.writeText(text);
+    } catch {
+      // http / older browsers: fall back to a temporary textarea + execCommand
+      const ta = document.createElement('textarea');
+      ta.value = text;
+      ta.style.position = 'fixed';
+      ta.style.opacity = '0';
+      document.body.appendChild(ta);
+      ta.select();
+      document.execCommand('copy');
+      ta.remove();
+    }
+    const original = btn.textContent;
+    btn.textContent = btn.dataset.copiedLabel ?? original;
+    btn.disabled = true;
+    setTimeout(() => {
+      btn.textContent = original;
+      btn.disabled = false;
+    }, 1600);
+  });
+</script>
+
+<style>
+  .copy-inquiry {
+    display: inline-flex;
+    gap: 0.4rem;
+    margin-left: 0.4rem;
+    vertical-align: middle;
+  }
+  .copy-inquiry__btn {
+    font: inherit;
+    font-size: 0.78rem;
+    line-height: 1;
+    padding: 0.28rem 0.55rem;
+    border: 1px solid var(--color-border, #d5dad8);
+    border-radius: 999px;
+    background: var(--color-surface, #f6f8f7);
+    color: var(--color-brand-dark, #0a5c4c);
+    cursor: pointer;
+    white-space: nowrap;
+  }
+  .copy-inquiry__btn:hover {
+    border-color: var(--color-brand-dark, #0a5c4c);
+  }
+  .copy-inquiry__btn:disabled {
+    cursor: default;
+    opacity: 0.85;
+  }
+</style>
