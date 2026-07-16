@@ -38,6 +38,8 @@ test('destination detail page renders the sightseeing map with numbered pins and
   await expect(legendItems).toHaveCount(8);
   await expect(legendItems.filter({ hasText: '走婚桥' })).toHaveText(/5\s*走婚桥/);
   await expect(legendItems.filter({ hasText: '里格半岛' })).toHaveText(/3\s*里格半岛/);
+  // A distance scale renders so viewers can estimate distances.
+  await expect(page.locator('.spot-map .leaflet-control-scale-line')).toHaveText(/\d+\s*(km|m)/);
 });
 
 // ---- Covers wired into route surfaces ----

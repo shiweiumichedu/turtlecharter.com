@@ -45,6 +45,9 @@ const { spots, height = '440px' } = Astro.props;
 
     const map = L.map(el, { scrollWheelZoom: false });
 
+    // Distance scale so viewers can judge how far apart the sights are.
+    L.control.scale({ metric: true, imperial: false, position: 'bottomleft' }).addTo(map);
+
     L.tileLayer(
       'https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}',
       {
@@ -127,6 +130,13 @@ const { spots, height = '440px' } = Astro.props;
       grid-template-columns: 1fr 1fr;
       column-gap: 0.75rem;
     }
+  }
+  /* Keep the scale bar legible on top of satellite imagery. */
+  :global(.spot-map .leaflet-control-scale-line) {
+    background: rgba(20, 20, 20, 0.6);
+    color: #fff;
+    border-color: #fff;
+    text-shadow: none;
   }
   :global(.spot-map__marker-icon) {
     background: none;
