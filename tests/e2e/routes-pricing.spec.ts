@@ -6,7 +6,7 @@ test('/routes lists route cards with a "from" price', async ({ page }) => {
   const cards = page.locator('[data-testid="route-card"]');
   await expect(cards).toHaveCount(2);
   await expect(page.locator('body')).toContainText('大理环洱海'); // Dali route zh title
-  await expect(page.locator('body')).toContainText('¥800'); // Dali "from" (lowest of 800/1300)
+  await expect(page.locator('body')).toContainText('¥700'); // Dali "from" (lowest of 700/1300)
   await expect(page.locator('a[href="/routes/dali-day-charter"]')).toHaveCount(1);
 });
 
@@ -27,7 +27,7 @@ test('/routes/dali-day-charter shows itinerary and a per-day pricing table', asy
   const pricing = page.locator('[data-testid="pricing-table"]');
   await expect(pricing).toContainText('每日价'); // per_day mode label
   await expect(pricing).toContainText('轿车'); // sedan type label
-  await expect(pricing).toContainText('¥800');
+  await expect(pricing).toContainText('¥700');
   await expect(pricing).toContainText('¥1,300');
 });
 
@@ -36,7 +36,7 @@ test('/routes/kunming-dali-lijiang-lugu-lake shows a package pricing table', asy
   await page.goto('/routes/kunming-dali-lijiang-lugu-lake');
   const pricing = page.locator('[data-testid="pricing-table"]');
   await expect(pricing).toContainText('套餐总价'); // package mode label
-  await expect(pricing).toContainText('¥4,800');
+  await expect(pricing).toContainText('¥6,000');
   await expect(pricing).toContainText('¥7,200');
 });
 
@@ -45,7 +45,7 @@ test('/en/routes/kunming-dali-lijiang-lugu-lake renders English mode label and n
   await expect(page.locator('html')).toHaveAttribute('lang', 'en');
   const pricing = page.locator('[data-testid="pricing-table"]');
   await expect(pricing).toContainText('Package price');
-  await expect(pricing).toContainText('¥4,800');
+  await expect(pricing).toContainText('¥6,000');
   await expect(pricing).toContainText("excl. meals"); // English price note
 });
 

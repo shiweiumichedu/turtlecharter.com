@@ -9,7 +9,7 @@ highlights_en: [Erhai Lake, Jade Dragon Snow Mountain, Lugu Lake, Gemu Goddess M
 pricing_mode: package
 pricing:
   - vehicle_type: sedan
-    price_cny: 4800
+    price_cny: 6000
   - vehicle_type: van
     price_cny: 7200
 price_note_zh: 含油费、过路费、住宿、门票；不含正餐
