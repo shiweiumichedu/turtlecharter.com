@@ -9,7 +9,7 @@ highlights_en: [Erhai Lake, Xizhou Old Town, Shuanglang]
 pricing_mode: per_day
 pricing:
   - vehicle_type: sedan
-    price_cny: 800
+    price_cny: 700
   - vehicle_type: van
     price_cny: 1300
 price_note_zh: 每日价，含油费、过路费、司机食宿；不含门票
