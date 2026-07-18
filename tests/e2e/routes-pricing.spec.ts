@@ -4,7 +4,7 @@ import { test, expect } from '@playwright/test';
 test('/routes lists route cards with a "from" price', async ({ page }) => {
   await page.goto('/routes');
   const cards = page.locator('[data-testid="route-card"]');
-  await expect(cards).toHaveCount(2);
+  await expect(cards).toHaveCount(6);
   await expect(page.locator('body')).toContainText('大理环洱海'); // Dali route zh title
   await expect(page.locator('body')).toContainText('¥700'); // Dali "from" (lowest of 700/1300)
   await expect(page.locator('a[href="/routes/dali-day-charter"]')).toHaveCount(1);
@@ -53,8 +53,9 @@ test('/en/routes/kunming-dali-lijiang-lugu-lake renders English mode label and n
 test('homepage shows only featured routes', async ({ page }) => {
   await page.goto('/');
   const cards = page.locator('.featured-routes [data-testid="route-card"]');
-  await expect(cards).toHaveCount(1); // only the grand loop is featured
+  await expect(cards).toHaveCount(2); // grand loop + Shangri-La loop
   await expect(page.locator('.featured-routes')).toContainText('经典环线'); // grand loop
+  await expect(page.locator('.featured-routes')).toContainText('香格里拉'); // Shangri-La loop
   await expect(page.locator('.featured-routes')).not.toContainText('大理环洱海'); // Dali not featured
 });
 
@@ -62,6 +63,7 @@ test('/en/ homepage shows featured routes in English', async ({ page }) => {
   await page.goto('/en/');
   await expect(page.locator('html')).toHaveAttribute('lang', 'en');
   const cards = page.locator('.featured-routes [data-testid="route-card"]');
-  await expect(cards).toHaveCount(1);
+  await expect(cards).toHaveCount(2);
   await expect(page.locator('.featured-routes')).toContainText('Classic Loop');
+  await expect(page.locator('.featured-routes')).toContainText('Shangri-La');
 });

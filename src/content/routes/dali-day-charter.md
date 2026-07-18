@@ -14,7 +14,7 @@ pricing:
     price_cny: 1300
 price_note_zh: 每日价，含油费、过路费、司机食宿；不含门票
 price_note_en: Per-day price, incl. fuel, tolls, driver's meals & lodging; excl. tickets
-order: 2
+order: 5
 ---
 
 ## 行程 Itinerary
